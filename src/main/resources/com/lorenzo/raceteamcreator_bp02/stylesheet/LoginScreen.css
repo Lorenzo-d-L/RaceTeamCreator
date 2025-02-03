@@ -1,0 +1,12 @@
+VBox{
+    -fx-background-color: #f0f0f0;
+    -fx-alignment: center;
+    -fx-padding: 20;
+}
+
+#username, #password{
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
