@@ -51,14 +51,15 @@ public class LoginScreen {
         scene.getStylesheets().add(css);
 
         login.setOnAction(e -> {
-            if (username.getText().equals("admin") && password.getText().equals("admin")) {
-                new HomeScreen(LoginStage);
-            }else {
-                System.out.println("Invalid login");
-            }
+//            if (username.getText().equals("admin") && password.getText().equals("admin")) {
+//                new HomeScreen(LoginStage);
+//            }else {
+//                System.out.println("Invalid login");
+//            }
             new HomeScreen(LoginStage);
         });
 
+        LoginStage.setResizable(false);
         LoginStage.setTitle("Login");
         LoginStage.setScene(scene);
         LoginStage.show();
