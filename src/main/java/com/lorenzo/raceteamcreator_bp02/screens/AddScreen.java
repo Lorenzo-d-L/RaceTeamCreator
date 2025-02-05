@@ -1,6 +1,7 @@
 package com.lorenzo.raceteamcreator_bp02.screens;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -29,6 +30,7 @@ public class AddScreen {
     private TextField txtDriver2 = new TextField();
     private Label lbManager = new Label("Manager");
     private TextField txtManager = new TextField();
+    private Button btnAdd = new Button("Team Toevoegen");
 
     public AddScreen(Stage addStage) {
         Scene scene = new Scene(container, 800, 600);
@@ -47,10 +49,19 @@ public class AddScreen {
         grid.add(txtYear, 0, 7);
         grid.add(lbMotor, 0, 8);
         grid.add(txtMotor, 0, 9);
-        grid.add(lbDriver, 0, 10);
-        grid.add(lbDriver2, 1, 10);
-        grid.add(txtDriver1, 0, 11);
-        grid.add(txtDriver2, 1, 11);
+        grid.add(lbManager, 0, 11);
+        grid.add(txtManager, 0, 12);
+        grid.add(lbDriver, 0, 13);
+        grid.add(lbDriver2, 1, 13);
+        grid.add(txtDriver1, 0, 14);
+        grid.add(txtDriver2, 1, 14);
+        grid.add(btnAdd, 0, 15);
+
+        btnAdd.setOnAction(e -> {
+            // Team team = new Team(txtName.getText(), txtColor.getText(), txtCountry.getText(), txtYear.getText(), txtMotor.getText(), txtDriver1.getText(), txtDriver2.getText(), txtManager.getText());
+            // team.save();
+            // new HomeScreen(addStage);
+        });
 
 
 
