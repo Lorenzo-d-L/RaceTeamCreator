@@ -1,11 +1,15 @@
 package com.lorenzo.raceteamcreator_bp02.screens;
 
+import com.lorenzo.raceteamcreator_bp02.classes.Database;
+import com.lorenzo.raceteamcreator_bp02.classes.UserController;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+
+import java.sql.Connection;
 
 public class LoginScreen {
 
@@ -17,8 +21,9 @@ public class LoginScreen {
     private TextField password = new TextField();
     private Button login = new Button("Login");
     private Button register = new Button("Register");
-    private double x;
-    private double y;
+    private Database db = new Database();
+    private Connection conn = db.getConn();
+    private UserController uc = new UserController(db);
 
     public LoginScreen(Stage LoginStage) {
         title.setId("title");
@@ -35,12 +40,6 @@ public class LoginScreen {
 
         container.getChildren().add(root);
 
-//        x= (container.getWidth() - root.getWidth()) / 2;
-//        y = (container.getHeight() - root.getHeight()) / 2;
-//
-//        root.setLayoutX(x);
-//        root.setLayoutY(y);
-
         root.getChildren().add(title);
         root.getChildren().add(username);
         root.getChildren().add(password);
@@ -51,13 +50,18 @@ public class LoginScreen {
         scene.getStylesheets().add(css);
 
         login.setOnAction(e -> {
-//            if (username.getText().equals("admin") && password.getText().equals("admin")) {
-//                new HomeScreen(LoginStage);
-//            }else {
-//                System.out.println("Invalid login");
-//            }
-            new HomeScreen(LoginStage);
+            if (uc.loginUser()){
+                System.out.println("Logged in");
+            } else {
+                System.out.println("Not logged in");
+            }
+//            new HomeScreen(LoginStage);
         });
+
+        register.setOnAction(e -> {
+            uc.registerUser();
+        });
+
 
         LoginStage.setResizable(false);
         LoginStage.setTitle("Login");

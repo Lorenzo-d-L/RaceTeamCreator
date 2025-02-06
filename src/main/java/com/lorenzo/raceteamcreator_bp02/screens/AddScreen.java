@@ -8,6 +8,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class AddScreen {
@@ -34,6 +37,8 @@ public class AddScreen {
 
     public AddScreen(Stage addStage) {
         Scene scene = new Scene(container, 800, 600);
+        String url = "jdbc:mysql://localhost:3306/raceteamcreator?user=root&password=";
+        connectToDatabase(url);
 
        grid.setPrefSize(400, 300);
        grid.setLayoutX(200);
@@ -73,5 +78,14 @@ public class AddScreen {
         addStage.show();
     }
 
+    public void connectToDatabase(String url) {
+        try (Connection conn = DriverManager.getConnection(url)) {
+            if (conn != null) {
+                System.out.println("Connected to the database");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
