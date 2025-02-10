@@ -3,35 +3,96 @@ package com.lorenzo.raceteamcreator_bp02.screens;
 import com.lorenzo.raceteamcreator_bp02.classes.TeamController;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 
 public class ShowTeamScreen {
-    TeamController tc = new TeamController();
+//    TeamController tc = new TeamController();
+private Pane root = new Pane();
+    private Scene scene;
+    private VBox nav = new VBox();
+    private HBox showAllTeams = new HBox();
+    private HBox createTeam = new HBox();
+    private HBox home = new HBox();
+    private VBox icon = new VBox();
 
     public ShowTeamScreen(Stage stage) {
-        VBox root = new VBox();
-        Scene scene = new Scene(root, 800, 600);
+        scene = new Scene(root, 800, 600);
 
-        try{
-            ResultSet rs = tc.loadTeams(1);
-            if (rs.next()){
-                Label teamName = new Label("Team Name: " + rs.getString("teamName"));
-                Label teamColor = new javafx.scene.control.Label("Team Color: " + rs.getString("teamColor"));
-                Label teamCountry = new javafx.scene.control.Label("Team Country: " + rs.getString("teamCountry"));
-                Label teamYear = new javafx.scene.control.Label("Team Year: " + rs.getString("teamYear"));
-                Label teamMotor = new javafx.scene.control.Label("Team Motor: " + rs.getString("teamMotor"));
-                Label teamDriver1 = new javafx.scene.control.Label("Team Driver 1: " + rs.getString("teamDriver1"));
-                Label teamDriver2 = new javafx.scene.control.Label("Team Driver 2: " + rs.getString("teamDriver2"));
-                Label teamManager = new javafx.scene.control.Label("Team Manager: " + rs.getString("teamManager"));
+        Label title = new Label("Show Team");
+        title.setId("title");
 
-                root.getChildren().addAll(teamName, teamColor, teamCountry, teamYear, teamMotor, teamDriver1, teamDriver2, teamManager);
-            }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        icon.setPrefSize(100, 100);
+        icon.setMaxSize(100, 100);
+
+        nav.setPrefSize(100,550);
+        nav.setLayoutY(50);
+        nav.setAlignment(javafx.geometry.Pos.CENTER);
+        nav.setSpacing(50);
+
+        home.setPrefSize(50,50);
+        home.setMaxSize(50,50);
+
+        createTeam.setPrefSize(50,50);
+        createTeam.setMaxSize(50,50);
+
+        showAllTeams.setPrefSize(50,50);
+        showAllTeams.setMaxSize(50,50);
+
+        Image logo = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/HoofdLogo.png").toExternalForm());
+        ImageView imageView = new ImageView(logo);
+        imageView.setFitWidth(100);
+        imageView.setFitHeight(100);
+
+        Image homeIcon = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/HomeBut.png").toExternalForm());
+        ImageView homeButton = new ImageView(homeIcon);
+        homeButton.setFitWidth(50);
+        homeButton.setFitHeight(50);
+
+        Image show = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/ShowAll.png").toExternalForm());
+        ImageView showAll = new ImageView(show);
+        showAll.setFitWidth(50);
+        showAll.setFitHeight(50);
+
+        Image add = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/Add.png").toExternalForm());
+        ImageView addTeam = new ImageView(add);
+        addTeam.setFitWidth(50);
+        addTeam.setFitHeight(50);
+
+        root.getChildren().addAll(nav, icon, title);
+        nav.getChildren().addAll(home, showAllTeams, createTeam);
+        icon.getChildren().add(imageView);
+        home.getChildren().add(homeButton);
+        showAllTeams.getChildren().add(showAll);
+        createTeam.getChildren().add(addTeam);
+
+        root.setId("root");
+        nav.setId("nav");
+        home.setId("home");
+        showAllTeams.setId("showAllTeams");
+        createTeam.setId("createTeam");
+        icon.setId("icon");
+        title.setId("title");
+
+        String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/ShowTeamScreen.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
+        home.setOnMouseClicked(e -> {
+            new HomeScreen(stage);
+        });
+
+        addTeam.setOnMouseClicked(e -> {
+            new AddScreen(stage);
+        });
+
+        stage.setResizable(false);
+        stage.setTitle("Show Team");
         stage.setScene(scene);
         stage.show();
 
@@ -39,4 +100,4 @@ public class ShowTeamScreen {
 
 
     }
-}
+

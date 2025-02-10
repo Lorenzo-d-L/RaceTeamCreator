@@ -67,12 +67,12 @@ public class HomeScreen {
     title.setLayoutX(350);
     title.setLayoutY(300);
 
-    root.setStyle("-fx-background-color: #c95c5c");
-    nav.setStyle("-fx-background-color: #000000");
-    showAllTeams.setStyle("-fx-background-color: #b49d9d");
-    createTeam.setStyle("-fx-background-color: #58cebf");
-    home.setStyle("-fx-background-color: #bb45c7");
-    icon.setStyle("-fx-background-color: #ff0000");
+//    root.setStyle("-fx-background-color: #c95c5c");
+//    nav.setStyle("-fx-background-color: #000000");
+//    showAllTeams.setStyle("-fx-background-color: #b49d9d");
+//    createTeam.setStyle("-fx-background-color: #58cebf");
+//    home.setStyle("-fx-background-color: #bb45c7");
+//    icon.setStyle("-fx-background-color: #ff0000");
 
         root.getChildren().addAll(nav, icon, title);
         nav.getChildren().addAll(home, showAllTeams, createTeam);
@@ -80,6 +80,19 @@ public class HomeScreen {
         home.getChildren().add(homeButton);
         showAllTeams.getChildren().add(showAll);
         createTeam.getChildren().add(addTeam);
+
+        root.setId("root");
+        nav.setId("nav");
+        home.setId("home");
+        showAllTeams.setId("showAllTeams");
+        createTeam.setId("createTeam");
+        icon.setId("icon");
+        title.setId("title");
+
+
+        String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/HomeScreen.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
 
         addTeam.setOnMouseClicked(e -> {
             new AddScreen(stage);
@@ -89,9 +102,11 @@ public class HomeScreen {
             new ShowTeamScreen(stage);
         });
 
+
         stage.setResizable(false);
         stage.setTitle("Home");
         stage.setScene(scene);
         stage.show();
+
     }
 }

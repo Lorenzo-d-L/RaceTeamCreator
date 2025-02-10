@@ -1,5 +1,5 @@
 VBox{
-    -fx-background-color: #f0f0f0;
+    -fx-background-color: #dc1010;
     -fx-alignment: center;
     -fx-padding: 20;
 }
@@ -9,4 +9,8 @@ VBox{
     -fx-border-color: #000000;
     -fx-border-width: 1;
     -fx-border-radius: 5;
+}
+
+#darkOverlay {
+    -fx-fill: rgba(0, 0, 0, 0.5); /* Adjust the alpha value to control the darkness */
 }

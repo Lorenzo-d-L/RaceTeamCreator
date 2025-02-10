@@ -1,0 +1,18 @@
+#nav{
+    -fx-background-color: #fff900;
+    -fx-background-radius: 0;
+    -fx-border-color: #000000;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 0;
+}
+
+#root{
+    -fx-background-color: #fd0b0b;
+    -fx-padding: 20;
+}
+
+Pane{
+    -fx-background-color: #fd0b0b;
+    -fx-padding: 20;
+}
