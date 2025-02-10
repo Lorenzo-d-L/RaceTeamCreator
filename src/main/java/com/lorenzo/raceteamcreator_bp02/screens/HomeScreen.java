@@ -85,6 +85,10 @@ public class HomeScreen {
             new AddScreen(stage);
         });
 
+        showAll.setOnMouseClicked(e -> {
+            new ShowTeamScreen(stage);
+        });
+
         stage.setResizable(false);
         stage.setTitle("Home");
         stage.setScene(scene);

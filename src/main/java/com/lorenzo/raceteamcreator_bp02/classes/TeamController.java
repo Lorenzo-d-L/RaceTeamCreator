@@ -1,24 +1,62 @@
 package com.lorenzo.raceteamcreator_bp02.classes;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public class TeamController {
+    private Database db;
+    private Statement stm;
 
-    public TeamController() {
+
+
+
+    public TeamController(Database db) {
+        this.db = db;
+        try {
+            this.stm = db.getConn().createStatement();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void saveTeam(){
-
+    public void saveTeam(String teamName, String teamColor, String teamCountry, String teamYear, String teamMotor, String teamDriver1, String teamDriver2, String teamManager) throws Exception {
+        try {
+            this.stm.executeUpdate("INSERT INTO team (teamName, teamColor, teamCountry, teamYear, teamMotor, teamDriver1, teamDriver2, teamManager) VALUES ('" + teamName + "', '" + teamColor + "', '" + teamCountry + "', '" + teamYear + "', '" + teamMotor + "', '" + teamDriver1 + "', '" + teamDriver2 + "', '" + teamManager + "')");
+        } catch (Exception e) {
+            throw new Exception("Error: " + e.getMessage());
+        }
     }
 
-    public void loadTeam(){
-
+    public ResultSet loadTeams(int team_id) throws Exception{
+        try {
+            return this.stm.executeQuery("SELECT * FROM teams WHERE team_id = " + team_id);
+        } catch (Exception e) {
+            throw new Exception("Error: " + e.getMessage());
+        }
     }
 
-    public void deleteTeam(){
+//    public void loadTeam( int team_id) throws Exception {
+//        try {
+//            this.stm.executeQuery("SELECT * FROM teams WHERE team_id = " + team_id);
+//        } catch (Exception e) {
+//            throw new Exception("Error: " + e.getMessage());
+//        }
+//    }
 
+    public void deleteTeam(int team_id) throws Exception {
+        try {
+            this.stm.executeUpdate("DELETE FROM team WHERE team_id = " + team_id);
+        } catch (Exception e) {
+            throw new Exception("Error: " + e.getMessage());
+        }
     }
 
-    public void updateTeam(){
-
+    public void updateTeam( int team_id, String teamName, String teamColor, String teamCountry, String teamYear, String teamMotor, String teamDriver1, String teamDriver2, String teamManager) throws Exception {
+        try {
+            this.stm.executeUpdate("UPDATE team SET teamName = '" + teamName + "', teamColor = '" + teamColor + "', teamCountry = '" + teamCountry + "', teamYear = '" + teamYear + "', teamMotor = '" + teamMotor + "', teamDriver1 = '" + teamDriver1 + "', teamDriver2 = '" + teamDriver2 + "', teamManager = '" + teamManager + "' WHERE team_id = " + team_id);
+        } catch (Exception e) {
+            throw new Exception("Error: " + e.getMessage());
+        }
     }
 
 

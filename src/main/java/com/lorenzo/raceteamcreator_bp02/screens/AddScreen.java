@@ -63,6 +63,15 @@ public class AddScreen {
         grid.add(btnAdd, 0, 15);
 
         btnAdd.setOnAction(e -> {
+            String teamName = txtName.getText();
+            String teamColor = txtColor.getText();
+            String teamCountry = txtCountry.getText();
+            String teamYear = txtYear.getText();
+            String teamMotor = txtMotor.getText();
+            String teamDriver1 = txtDriver1.getText();
+            String teamDriver2 = txtDriver2.getText();
+            String teamManager = txtManager.getText();
+
             // Team team = new Team(txtName.getText(), txtColor.getText(), txtCountry.getText(), txtYear.getText(), txtMotor.getText(), txtDriver1.getText(), txtDriver2.getText(), txtManager.getText());
             // team.save();
             // new HomeScreen(addStage);

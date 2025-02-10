@@ -19,6 +19,7 @@ public class LoginScreen {
     private Label title = new Label("Login");
     private TextField username = new TextField();
     private TextField password = new TextField();
+    private Object User;
     private Button login = new Button("Login");
     private Button register = new Button("Register");
     private Database db = new Database();
@@ -55,12 +56,12 @@ public class LoginScreen {
             } else {
                 System.out.println("Not logged in");
             }
-//            new HomeScreen(LoginStage);
+            new HomeScreen(LoginStage);
         });
 
-        register.setOnAction(e -> {
-            uc.registerUser();
-        });
+//        register.setOnAction(e -> {
+//            uc.registerUser(this);
+//        });
 
 
         LoginStage.setResizable(false);
@@ -69,6 +70,8 @@ public class LoginScreen {
         LoginStage.show();
     }
 
+
+
     public Scene getLoginScene() {
         return LoginScene;
     }
@@ -76,4 +79,8 @@ public class LoginScreen {
     public void setLoginScene(Scene loginScene) {
         LoginScene = loginScene;
     }
+
+
+
+
 }
