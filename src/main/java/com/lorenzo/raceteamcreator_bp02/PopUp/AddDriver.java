@@ -1,7 +1,10 @@
 package com.lorenzo.raceteamcreator_bp02.PopUp;
 
 import com.lorenzo.raceteamcreator_bp02.classes.Database;
+import com.lorenzo.raceteamcreator_bp02.classes.Drivers;
 import com.lorenzo.raceteamcreator_bp02.classes.TeamController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -19,10 +22,10 @@ public class AddDriver {
     private Scene Scene;
     private TeamController tc;
     private Database db;
-    private ComboBox<String> cbDriver1;
-    private ComboBox<String> cbDriver2;
+    private ComboBox<Drivers> cbDriver1;
+    private ComboBox<Drivers> cbDriver2;
 
-    public AddDriver(Stage AddDriverStage, ComboBox<String> cbDriver1, ComboBox<String> cbDriver2) {
+    public AddDriver(Stage AddDriverStage, ComboBox<Drivers> cbDriver1, ComboBox<Drivers> cbDriver2) {
         this.cbDriver1 = cbDriver1;
         this.cbDriver2 = cbDriver2;
 
@@ -44,6 +47,10 @@ public class AddDriver {
                 tc.saveDriver(txtDriver.getText());
                 cbDriver1.getItems().addAll(tc.getCoureurs());
                 cbDriver2.getItems().addAll(tc.getCoureurs());
+
+
+
+
                 AddDriverStage.close();
             } catch (Exception exception) {
                 exception.printStackTrace();

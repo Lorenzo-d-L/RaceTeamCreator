@@ -2,6 +2,7 @@ package com.lorenzo.raceteamcreator_bp02.screens;
 
 import com.lorenzo.raceteamcreator_bp02.PopUp.AddDriver;
 import com.lorenzo.raceteamcreator_bp02.classes.Database;
+import com.lorenzo.raceteamcreator_bp02.classes.Drivers;
 import com.lorenzo.raceteamcreator_bp02.classes.TeamController;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -33,9 +34,9 @@ public class AddScreen {
     private Label lbMotor = new Label("Motorleverancier");
     private TextField txtMotor = new TextField();
     private Label lbDriver = new Label("Driver1");
-    private ComboBox<String> cbDriver1;
+    private ComboBox<Drivers> cbDriver1;
     private Label lbDriver2 = new Label("Driver2");
-    private ComboBox<String> cbDriver2;
+    private ComboBox<Drivers> cbDriver2;
     private Label lbManager = new Label("Manager");
     private TextField txtManager = new TextField();
     private Button btnAdd = new Button("Team Toevoegen");
@@ -56,12 +57,13 @@ public class AddScreen {
         showAllTeams = new HBox();
         icon = new VBox();
         cbDriver1 = new ComboBox<>();
-        cbDriver2 = new ComboBox<>();
+        cbDriver2 = new ComboBox<Drivers>();
         db = new Database();
         tc = new TeamController(db);
 
         cbDriver1.getItems().addAll(tc.getCoureurs());
         cbDriver2.getItems().addAll(tc.getCoureurs());
+
 
         Scene scene = new Scene(container, 800, 600);
 
@@ -143,10 +145,12 @@ public class AddScreen {
         });
 
         btnAdd.setOnAction(e -> {
-
+            try {
+                tc.saveTeam(txtName.getText(), txtColor.getText(), txtCountry.getText(), txtYear.getText(), txtMotor.getText(), ((Drivers)cbDriver1.getValue()).getName(),  ((Drivers)cbDriver2.getValue()).getName(), txtManager.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
-
-
 
         container.getChildren().addAll(grid, nav, icon);
         nav.getChildren().addAll(home, showAllTeams, createTeam);

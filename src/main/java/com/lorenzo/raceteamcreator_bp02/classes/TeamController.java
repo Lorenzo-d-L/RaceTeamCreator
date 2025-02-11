@@ -1,6 +1,8 @@
 package com.lorenzo.raceteamcreator_bp02.classes;
 
 import com.lorenzo.raceteamcreator_bp02.PopUp.AddDriver;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -56,12 +58,13 @@ public class TeamController {
         }
     }
 
-    public ArrayList<String> getCoureurs() throws Exception {
+    public ObservableList<Drivers> getCoureurs() throws Exception {
         try {
-            ArrayList<String> coureurs = new ArrayList<>();
+            ObservableList<Drivers> coureurs = FXCollections.observableArrayList();
             ResultSet rs = this.stm.executeQuery("SELECT * FROM coureur");
             while (rs.next()) {
-                coureurs.add(rs.getString("naam"));
+                Drivers d = new Drivers(rs.getString("naam"));
+                coureurs.add(d);
             }
             return coureurs;
         } catch (Exception e) {
