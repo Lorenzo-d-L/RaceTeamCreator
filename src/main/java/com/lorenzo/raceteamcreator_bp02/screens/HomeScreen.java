@@ -95,7 +95,11 @@ public class HomeScreen {
 
 
         addTeam.setOnMouseClicked(e -> {
-            new AddScreen(stage);
+            try {
+                new AddScreen(stage);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         showAll.setOnMouseClicked(e -> {

@@ -49,7 +49,7 @@ public class AddScreen {
     private Database db;
     private TeamController tc;
 
-    public AddScreen(Stage addStage) {
+    public AddScreen(Stage addStage) throws Exception {
         nav = new VBox();
         home = new HBox();
         createTeam = new HBox();
@@ -59,6 +59,9 @@ public class AddScreen {
         cbDriver2 = new ComboBox<>();
         db = new Database();
         tc = new TeamController(db);
+
+        cbDriver1.getItems().addAll(tc.getCoureurs());
+        cbDriver2.getItems().addAll(tc.getCoureurs());
 
         Scene scene = new Scene(container, 800, 600);
 

@@ -88,7 +88,11 @@ private Pane root = new Pane();
         });
 
         addTeam.setOnMouseClicked(e -> {
-            new AddScreen(stage);
+            try {
+                new AddScreen(stage);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         stage.setResizable(false);
