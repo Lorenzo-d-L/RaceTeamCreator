@@ -1,7 +1,10 @@
 package com.lorenzo.raceteamcreator_bp02.classes;
 
+import com.lorenzo.raceteamcreator_bp02.PopUp.AddDriver;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class TeamController {
     private Database db;
@@ -21,7 +24,13 @@ public class TeamController {
 
     public void saveTeam(String teamName, String teamColor, String teamCountry, String teamYear, String teamMotor, String teamDriver1, String teamDriver2, String teamManager) throws Exception {
         try {
-            this.stm.executeUpdate("INSERT INTO team (teamName, teamColor, teamCountry, teamYear, teamMotor, teamDriver1, teamDriver2, teamManager) VALUES ('" + teamName + "', '" + teamColor + "', '" + teamCountry + "', '" + teamYear + "', '" + teamMotor + "', '" + teamDriver1 + "', '" + teamDriver2 + "', '" + teamManager + "')");
+            this.stm.executeUpdate("INSERT INTO team (teamName, teamColor, teamCountry, teamYear, teamMotor, teamManager) VALUES ('" + teamName + "', '" + teamColor + "', '" + teamCountry + "', '" + teamYear + "', '" + teamMotor +  "', '" + teamManager + "')");
+            ResultSet rs = stm.executeQuery("SELECT max(id) as teamid FROM teams");
+            if(rs.next()) {
+                int team_id = rs.getInt("id");
+                this.stm.execute("INSERT INTO team_coureur (team_id, coureur_id) VALUES ("+ team_id + ", '"+ teamDriver1 + "') ");
+                this.stm.execute("INSERT INTO team_coureur (team_id, coureur_id) VALUES ("+ team_id + ", '"+ teamDriver2 + "') ");
+            }
         } catch (Exception e) {
             throw new Exception("Error: " + e.getMessage());
         }
@@ -30,6 +39,31 @@ public class TeamController {
     public ResultSet loadTeams(int team_id) throws Exception{
         try {
             return this.stm.executeQuery("SELECT * FROM teams WHERE team_id = " + team_id);
+        } catch (Exception e) {
+            throw new Exception("Error: " + e.getMessage());
+        }
+    }
+
+    public void saveDriver(String txtDriver) throws Exception {
+        try {
+            ResultSet rs = this.stm.executeQuery("SELECT COUNT(*) AS count FROM coureur WHERE naam = '" + txtDriver + "'");
+            if (rs.next() && rs.getInt("count") > 0) {
+                throw new Exception("Driver already exists");
+            }
+            this.stm.execute("INSERT INTO coureur (naam) VALUES ('" + txtDriver + "')");
+        } catch (Exception e) {
+            throw new Exception("Error: " + e.getMessage());
+        }
+    }
+
+    public ArrayList<String> getCoureurs() throws Exception {
+        try {
+            ArrayList<String> coureurs = new ArrayList<>();
+            ResultSet rs = this.stm.executeQuery("SELECT * FROM coureur");
+            while (rs.next()) {
+                coureurs.add(rs.getString("naam"));
+            }
+            return coureurs;
         } catch (Exception e) {
             throw new Exception("Error: " + e.getMessage());
         }

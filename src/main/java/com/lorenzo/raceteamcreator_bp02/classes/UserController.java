@@ -19,24 +19,38 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
-//    public void registerUser(LoginScreen loginScreen) {
-//        String email = LoginScreen.getUsername();
-//        String password = LoginScreen.getPassword();
-//        try {
-//            stm.executeUpdate("INSERT INTO login (email, password) VALUES ('" + email + "', '" + password + "')");
-//            System.out.println("User registered");
-//        } catch (Exception e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//    }
+    public void registerUser(LoginScreen loginScreen) {
+        String email = loginScreen.getEmail();
+        String password = loginScreen.getPassword();
+        if (email == null|| email.trim().isEmpty() || !email.contains("@" ) && !email.contains(".") && password == null || password.trim().isEmpty()) {
+            System.out.println("Please enter an email");
+            return;
+        }
+
+        try {
+            stm.executeUpdate("INSERT INTO login (email, password) VALUES ('" + email + "', '" + password + "')");
+            System.out.println("User registered");
+        }catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
     public boolean loginUser() {
         try {
-            return stm.execute("SELECT * FROM login WHERE email = '" + email + "' AND password = '" + password + "'");
+            String query = "SELECT * FROM login WHERE email = '" + email + "' AND password = '" + password + "'";
+            return stm.executeQuery(query).next();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return false;
         }
+    }
+
+    public void setEmail(Object email) {
+        this.email = email;
+    }
+
+    public void setPassword(Object password) {
+        this.password = password;
     }
 }
 

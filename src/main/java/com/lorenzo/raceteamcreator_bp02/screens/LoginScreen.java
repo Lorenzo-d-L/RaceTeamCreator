@@ -27,7 +27,6 @@ public class LoginScreen {
     private Button login = new Button("Login");
     private Button register = new Button("Register");
     private Database db = new Database();
-    private Connection conn = db.getConn();
     private UserController uc = new UserController(db);
     private ImageView backgroundImage;
 
@@ -52,8 +51,6 @@ public class LoginScreen {
         StackPane backgroundPane = new StackPane();
         backgroundPane.getChildren().addAll(backgroundImage, darkOverlay);
 
-
-
         root.setMaxSize(300, 300);
         root.setMinSize(200, 300);
 
@@ -66,23 +63,24 @@ public class LoginScreen {
         root.getChildren().add(login);
         root.getChildren().add(register);
 
-
         String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/LoginScreen.css").toExternalForm();
         scene.getStylesheets().add(css);
 
         login.setOnAction(e -> {
-            if (uc.loginUser()){
-                System.out.println("Logged in");
-            } else {
-                System.out.println("Not logged in");
+            uc.setEmail(username.getText());
+            uc.setPassword(password.getText());
+            if (uc.loginUser()) {
+                System.out.println("User logged in");
+                new HomeScreen(LoginStage);
+            }else{
+                System.out.println("User not logged in");
             }
             new HomeScreen(LoginStage);
         });
 
-//        register.setOnAction(e -> {
-//            uc.registerUser(this);
-//        });
-
+        register.setOnAction(e -> {
+            uc.registerUser(this);
+        });
 
         LoginStage.setResizable(false);
         LoginStage.setTitle("Login");
@@ -90,7 +88,13 @@ public class LoginScreen {
         LoginStage.show();
     }
 
+    public String getEmail() {
+        return username.getText();
+    }
 
+    public String getPassword() {
+        return password.getText();
+    }
 
     public Scene getLoginScene() {
         return LoginScene;
