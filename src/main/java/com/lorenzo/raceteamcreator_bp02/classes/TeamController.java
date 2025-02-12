@@ -26,7 +26,7 @@ public class TeamController {
 
     public void saveTeam(String teamName, String teamColor, String teamCountry, String teamYear, String teamMotor, String teamDriver1, String teamDriver2, String teamManager) throws Exception {
         try {
-            this.stm.executeUpdate("INSERT INTO team (teamName, teamColor, teamCountry, teamYear, teamMotor, teamManager) VALUES ('" + teamName + "', '" + teamColor + "', '" + teamCountry + "', '" + teamYear + "', '" + teamMotor +  "', '" + teamManager + "')");
+            this.stm.executeUpdate("INSERT INTO teams (teamnaam, kleur, team_land, team_jaar, motor_leverancier, team_manager, coureur1, coureur2) VALUES ('" + teamName + "', '" + teamColor + "', '" + teamCountry + "', '" + teamYear + "', '" + teamMotor +  "', '" + teamManager + "', '" + teamDriver1 + "', '" + teamDriver2 + "')");
             ResultSet rs = stm.executeQuery("SELECT max(id) as teamid FROM teams");
             if(rs.next()) {
                 int team_id = rs.getInt("id");
@@ -67,6 +67,20 @@ public class TeamController {
                 coureurs.add(d);
             }
             return coureurs;
+        } catch (Exception e) {
+            throw new Exception("Error: " + e.getMessage());
+        }
+    }
+
+    public ObservableList<MotorLeverancier> getMotorLeveranciers() throws Exception {
+        try {
+            ObservableList<MotorLeverancier> motorLeveranciers = FXCollections.observableArrayList();
+            ResultSet rs = this.stm.executeQuery("SELECT * FROM motor_leverancier");
+            while (rs.next()) {
+                MotorLeverancier ml = new MotorLeverancier(rs.getString("naam"));
+                motorLeveranciers.add(ml);
+            }
+            return motorLeveranciers;
         } catch (Exception e) {
             throw new Exception("Error: " + e.getMessage());
         }

@@ -3,7 +3,9 @@ package com.lorenzo.raceteamcreator_bp02.screens;
 import com.lorenzo.raceteamcreator_bp02.PopUp.AddDriver;
 import com.lorenzo.raceteamcreator_bp02.classes.Database;
 import com.lorenzo.raceteamcreator_bp02.classes.Drivers;
+import com.lorenzo.raceteamcreator_bp02.classes.MotorLeverancier;
 import com.lorenzo.raceteamcreator_bp02.classes.TeamController;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -30,9 +32,9 @@ public class AddScreen {
     private Label lbCountry = new Label("Country");
     private TextField txtCountry = new TextField();
     private Label lbYear = new Label("Year");
-    private TextField txtYear = new TextField();
+    private TextField dYear;
     private Label lbMotor = new Label("Motorleverancier");
-    private TextField txtMotor = new TextField();
+    private ComboBox<MotorLeverancier> cbMotor;
     private Label lbDriver = new Label("Driver1");
     private ComboBox<Drivers> cbDriver1;
     private Label lbDriver2 = new Label("Driver2");
@@ -51,18 +53,22 @@ public class AddScreen {
     private TeamController tc;
 
     public AddScreen(Stage addStage) throws Exception {
+        dYear = new TextField();
         nav = new VBox();
         home = new HBox();
         createTeam = new HBox();
         showAllTeams = new HBox();
         icon = new VBox();
+        cbMotor = new ComboBox<MotorLeverancier>();
         cbDriver1 = new ComboBox<>();
         cbDriver2 = new ComboBox<Drivers>();
+        cbMotor = new ComboBox<MotorLeverancier>();
         db = new Database();
         tc = new TeamController(db);
 
         cbDriver1.getItems().addAll(tc.getCoureurs());
         cbDriver2.getItems().addAll(tc.getCoureurs());
+        cbMotor.getItems().addAll(tc.get)
 
 
         Scene scene = new Scene(container, 800, 600);
@@ -74,7 +80,7 @@ public class AddScreen {
 
         nav.setPrefSize(100, 550);
         nav.setLayoutY(50);
-        nav.setAlignment(javafx.geometry.Pos.CENTER);
+        nav.setAlignment(Pos.CENTER);
         nav.setSpacing(50);
 
         icon.setPrefSize(100, 100);
@@ -100,9 +106,9 @@ public class AddScreen {
         grid.add(lbCountry, 0, 4);
         grid.add(txtCountry, 0, 5);
         grid.add(lbYear, 0, 6);
-        grid.add(txtYear, 0, 7);
+        grid.add(dYear, 0, 7);
         grid.add(lbMotor, 0, 8);
-        grid.add(txtMotor, 0, 9);
+        grid.add(cbMotor, 0, 9);
         grid.add(lbManager, 0, 11);
         grid.add(txtManager, 0, 12);
         grid.add(lbDriver, 0, 13);
@@ -146,7 +152,7 @@ public class AddScreen {
 
         btnAdd.setOnAction(e -> {
             try {
-                tc.saveTeam(txtName.getText(), txtColor.getText(), txtCountry.getText(), txtYear.getText(), txtMotor.getText(), ((Drivers)cbDriver1.getValue()).getName(),  ((Drivers)cbDriver2.getValue()).getName(), txtManager.getText());
+                tc.saveTeam(txtName.getText(), txtColor.getText(), txtCountry.getText(), ((MotorLeverancier)dYear.getValue()), ((MotorLeverancier)txtMotor.getValue()).getName(), ((Drivers)cbDriver1.getValue()).getName(),  ((Drivers)cbDriver1.getValue()).getName(), txtManager.getText());
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
