@@ -16,3 +16,10 @@ Pane{
     -fx-background-color: #fd0b0b;
     -fx-padding: 20;
 }
+
+#teamBox{
+    -fx-background-color: #58cebf;
+    -fx-padding: 20;
+    -fx-border-color: purple;
+    -fx-border-width: 5;
+}

@@ -1,16 +1,19 @@
 package com.lorenzo.raceteamcreator_bp02.screens;
 
+import com.lorenzo.raceteamcreator_bp02.PopUp.EditPopup;
+import com.lorenzo.raceteamcreator_bp02.classes.Database;
+import com.lorenzo.raceteamcreator_bp02.classes.Team;
 import com.lorenzo.raceteamcreator_bp02.classes.TeamController;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
+import java.util.List;
 
 public class ShowTeamScreen {
 //    TeamController tc = new TeamController();
@@ -21,8 +24,12 @@ private Pane root = new Pane();
     private HBox createTeam = new HBox();
     private HBox home = new HBox();
     private VBox icon = new VBox();
+    private TeamController tc;
+    private Database db;
 
     public ShowTeamScreen(Stage stage) {
+        db = new Database();
+        tc = new TeamController(db);
         scene = new Scene(root, 800, 600);
 
         Label title = new Label("Show Team");
@@ -100,8 +107,58 @@ private Pane root = new Pane();
         stage.setScene(scene);
         stage.show();
 
+        showTeams();
         }
 
+    public void showTeams() {
+        List<Team> teams = tc.getTeams();
+        FlowPane teamBox = new FlowPane();
+        teamBox.setLayoutX(150);
+        teamBox.setLayoutY(10);
+        teamBox.setHgap(10);
+        teamBox.setVgap(10);
+
+        for (Team team : teams) {
+            VBox teamInfoBox = new VBox();
+            teamInfoBox.setSpacing(10);
+            teamInfoBox.setStyle("-fx-border-color: black; -fx-padding: 10;");
+
+            Label teamName = new Label("Name: " + team.getTeamName());
+            Label teamColor = new Label("Color: " + team.getTeamColor());
+            Label teamCountry = new Label("Country: " + team.getTeamCountry());
+            Label teamYear = new Label("Year: " + team.getTeamYear().toString());
+            Label teamMotor = new Label("Motor: " + team.getTeamMotor());
+            Label teamDriver1 = new Label("Driver 1: " + team.getTeamDriver1());
+            Label teamDriver2 = new Label("Driver 2: " + team.getTeamDriver2());
+            Label teamManager = new Label("Manager: " + team.getTeamManager());
+
+            Image edit = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/Edit_icon.png").toExternalForm());
+            ImageView editIcon = new ImageView(edit);
+            editIcon.setFitWidth(20);
+            editIcon.setFitHeight(20);
+
+
+            teamInfoBox.getChildren().addAll(teamName, teamColor, teamCountry, teamYear, teamMotor, teamDriver1, teamDriver2, teamManager, editIcon);
+            teamBox.getChildren().add(teamInfoBox);
+
+            editIcon.setOnMouseClicked(e -> {
+                new EditPopup(new Stage(), team);
+            });
+        }
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(teamBox);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setLayoutX(150);
+        scrollPane.setLayoutY(100);
+        scrollPane.setPrefViewportHeight(550);
+        scrollPane.setPrefViewportWidth(650);
+
+        teamBox.setId("teamBox");
+        root.getChildren().add(scrollPane);
+
+
+    }
 
     }
 

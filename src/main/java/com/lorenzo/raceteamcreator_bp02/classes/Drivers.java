@@ -17,4 +17,8 @@ public class Drivers {
     public String toString() {
         return name;
     }
+
+    public Object getDriverName() {
+        return name;
+    }
 }

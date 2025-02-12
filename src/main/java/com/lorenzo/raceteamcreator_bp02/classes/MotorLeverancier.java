@@ -15,4 +15,8 @@ public class MotorLeverancier {
     public String toString() {
         return motorLeverancier;
     }
+
+    public Object getMotorLeverancier() {
+        return motorLeverancier;
+    }
 }

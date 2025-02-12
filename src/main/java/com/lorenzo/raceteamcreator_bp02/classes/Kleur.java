@@ -15,4 +15,8 @@ public class Kleur {
     public String toString() {
         return kleur;
     }
+
+    public Object getKleur() {
+        return kleur;
+    }
 }
