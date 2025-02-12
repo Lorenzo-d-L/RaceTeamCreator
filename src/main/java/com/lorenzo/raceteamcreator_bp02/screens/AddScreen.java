@@ -1,10 +1,7 @@
 package com.lorenzo.raceteamcreator_bp02.screens;
 
 import com.lorenzo.raceteamcreator_bp02.PopUp.AddDriver;
-import com.lorenzo.raceteamcreator_bp02.classes.Database;
-import com.lorenzo.raceteamcreator_bp02.classes.Drivers;
-import com.lorenzo.raceteamcreator_bp02.classes.MotorLeverancier;
-import com.lorenzo.raceteamcreator_bp02.classes.TeamController;
+import com.lorenzo.raceteamcreator_bp02.classes.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -27,7 +24,7 @@ public class AddScreen {
     private Label lbName = new Label("Team Name");
     private TextField txtName = new TextField();
     private Label lbColor = new Label("Team Color");
-    private TextField txtColor = new TextField();
+    private ComboBox<Kleur> cbColor;
     private Label lbCountry = new Label("Country");
     private TextField txtCountry = new TextField();
     private Label lbYear = new Label("Year");
@@ -58,16 +55,17 @@ public class AddScreen {
         createTeam = new HBox();
         showAllTeams = new HBox();
         icon = new VBox();
-        cbMotor = new ComboBox<MotorLeverancier>();
         cbDriver1 = new ComboBox<Drivers>();
         cbDriver2 = new ComboBox<Drivers>();
         cbMotor = new ComboBox<MotorLeverancier>();
+        cbColor = new ComboBox<Kleur>();
         db = new Database();
         tc = new TeamController(db);
 
         cbDriver1.getItems().addAll(tc.getCoureurs());
         cbDriver2.getItems().addAll(tc.getCoureurs());
         cbMotor.getItems().addAll(tc.getMotorLeveranciers());
+        cbColor.getItems().addAll(tc.getKleuren());
 
         Scene scene = new Scene(container, 800, 600);
 
@@ -100,7 +98,7 @@ public class AddScreen {
         grid.add(lbName, 0, 0);
         grid.add(txtName, 0, 1);
         grid.add(lbColor, 0, 2);
-        grid.add(txtColor, 0, 3);
+        grid.add(cbColor, 0, 3);
         grid.add(lbCountry, 0, 4);
         grid.add(txtCountry, 0, 5);
         grid.add(lbYear, 0, 6);
@@ -151,7 +149,7 @@ public class AddScreen {
         btnAdd.setOnAction(e -> {
             try {
                 tc.saveTeam(txtName.getText(),
-                            txtColor.getText(),
+                            ((Kleur)cbColor.getValue()).getName(),
                             txtCountry.getText(),
                             dpYear.getValue().toString(),
                             ((MotorLeverancier)cbMotor.getValue()).getName(),

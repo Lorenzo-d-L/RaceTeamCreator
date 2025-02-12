@@ -98,6 +98,20 @@ public class TeamController {
         }
     }
 
+    public ObservableList<Kleur> getKleuren() throws Exception {
+        try {
+            ObservableList<Kleur> kleuren = FXCollections.observableArrayList();
+            ResultSet rs = this.stm.executeQuery("SELECT * FROM kleur");
+            while (rs.next()) {
+                Kleur k = new Kleur(rs.getString("kleur"));
+                kleuren.add(k);
+            }
+            return kleuren;
+        } catch (Exception e) {
+            throw new Exception("Error: " + e.getMessage());
+        }
+    }
+
     public void showTeams() throws Exception {
         try {
             ResultSet rs = this.stm.executeQuery("SELECT * FROM teams");
