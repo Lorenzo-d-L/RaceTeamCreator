@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Date;
 
 public class AddScreen {
     private Pane container = new Pane();
@@ -32,7 +31,7 @@ public class AddScreen {
     private Label lbCountry = new Label("Country");
     private TextField txtCountry = new TextField();
     private Label lbYear = new Label("Year");
-    private TextField dYear;
+    private DatePicker dpYear;
     private Label lbMotor = new Label("Motorleverancier");
     private ComboBox<MotorLeverancier> cbMotor;
     private Label lbDriver = new Label("Driver1");
@@ -53,14 +52,14 @@ public class AddScreen {
     private TeamController tc;
 
     public AddScreen(Stage addStage) throws Exception {
-        dYear = new TextField();
+        dpYear = new DatePicker();
         nav = new VBox();
         home = new HBox();
         createTeam = new HBox();
         showAllTeams = new HBox();
         icon = new VBox();
         cbMotor = new ComboBox<MotorLeverancier>();
-        cbDriver1 = new ComboBox<>();
+        cbDriver1 = new ComboBox<Drivers>();
         cbDriver2 = new ComboBox<Drivers>();
         cbMotor = new ComboBox<MotorLeverancier>();
         db = new Database();
@@ -68,8 +67,7 @@ public class AddScreen {
 
         cbDriver1.getItems().addAll(tc.getCoureurs());
         cbDriver2.getItems().addAll(tc.getCoureurs());
-        cbMotor.getItems().addAll(tc.get)
-
+        cbMotor.getItems().addAll(tc.getMotorLeveranciers());
 
         Scene scene = new Scene(container, 800, 600);
 
@@ -106,7 +104,7 @@ public class AddScreen {
         grid.add(lbCountry, 0, 4);
         grid.add(txtCountry, 0, 5);
         grid.add(lbYear, 0, 6);
-        grid.add(dYear, 0, 7);
+        grid.add(dpYear, 0, 7);
         grid.add(lbMotor, 0, 8);
         grid.add(cbMotor, 0, 9);
         grid.add(lbManager, 0, 11);
@@ -152,7 +150,14 @@ public class AddScreen {
 
         btnAdd.setOnAction(e -> {
             try {
-                tc.saveTeam(txtName.getText(), txtColor.getText(), txtCountry.getText(), ((MotorLeverancier)dYear.getValue()), ((MotorLeverancier)txtMotor.getValue()).getName(), ((Drivers)cbDriver1.getValue()).getName(),  ((Drivers)cbDriver1.getValue()).getName(), txtManager.getText());
+                tc.saveTeam(txtName.getText(),
+                            txtColor.getText(),
+                            txtCountry.getText(),
+                            dpYear.getValue().toString(),
+                            ((MotorLeverancier)cbMotor.getValue()).getName(),
+                            ((Drivers)cbDriver1.getValue()).getName(),
+                            ((Drivers)cbDriver2.getValue()).getName(),
+                            txtManager.getText());
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

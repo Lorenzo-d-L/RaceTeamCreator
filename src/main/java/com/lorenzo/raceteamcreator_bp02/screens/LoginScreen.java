@@ -37,9 +37,10 @@ public class LoginScreen {
         login.setId("login");
         register.setId("register");
         container.setId("container");
+        String styleLogin = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/LoginScreen.css").toExternalForm();
 
         Scene scene = new Scene(container, 800, 600);
-        LoginScene = scene;
+        scene.getStylesheets().add(styleLogin);
 
         backgroundImage = new ImageView(
                 new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/HoofdLogo.png").toExternalForm())
@@ -62,9 +63,6 @@ public class LoginScreen {
         root.getChildren().add(password);
         root.getChildren().add(login);
         root.getChildren().add(register);
-
-        String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/LoginScreen.css").toExternalForm();
-        scene.getStylesheets().add(css);
 
         login.setOnAction(e -> {
             uc.setEmail(username.getText());
