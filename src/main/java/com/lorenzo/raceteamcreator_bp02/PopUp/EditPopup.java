@@ -1,19 +1,13 @@
 package com.lorenzo.raceteamcreator_bp02.PopUp;
 
 import com.lorenzo.raceteamcreator_bp02.classes.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 public class EditPopup {
-    private Label lbTeamname;
+    private Label lbTeamName;
     private TextField txfTeamname;
     private Label lbColor;
     private ComboBox<Kleur> cbColor;
@@ -32,13 +26,13 @@ public class EditPopup {
     private Button addDriver;
     private Button editTeam;
     private Button cancel;
-    private GridPane gp;
+    private GridPane root;
     private Scene editScene;
     private TeamController tc;
     private Database db;
 
     public EditPopup(Stage editStage, Team team) {
-        lbTeamname = new Label("Team Name");
+        lbTeamName = new Label("Team Name");
         txfTeamname = new TextField(team.getTeamName());
         lbColor = new Label("Team Color");
         cbColor = new ComboBox<>();
@@ -57,11 +51,11 @@ public class EditPopup {
         addDriver = new Button("+");
         editTeam = new Button("Edit Team");
         cancel = new Button("Cancel");
-        gp = new GridPane();
+        root = new GridPane();
         db = new Database();
         tc = new TeamController(db);
 
-        lbTeamname.setId("lbTeamname");
+        lbTeamName.setId("lbTeamName");
         txfTeamname.setId("txfTeamname");
         lbColor.setId("lbColor");
         cbColor.setId("cbColor");
@@ -80,11 +74,11 @@ public class EditPopup {
         addDriver.setId("addDriver");
         editTeam.setId("editTeam");
         cancel.setId("cancel");
-        gp.setId("gp");
+        root.setId("root");
 
 
-        String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/addDriver.css").toExternalForm();
-        editScene = new Scene(gp, 400, 300);
+        String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/EditPopup.css").toExternalForm();
+        editScene = new Scene(root, 400, 300);
         editScene.getStylesheets().add(css);
 
         try {
@@ -101,28 +95,28 @@ public class EditPopup {
             throw new RuntimeException(e);
         }
 
-        gp.setHgap(5);
-        gp.setVgap(5);
+        root.setHgap(5);
+        root.setVgap(5);
 
-        gp.add(lbTeamname, 0, 0);
-        gp.add(txfTeamname, 1, 0);
-        gp.add(lbColor, 0, 1);
-        gp.add(cbColor, 1, 1);
-        gp.add(lbCountry, 0, 2);
-        gp.add(txfCountry, 1, 2);
-        gp.add(lbYear, 0, 3);
-        gp.add(dpYear, 1, 3);
-        gp.add(lbMotor, 0, 4);
-        gp.add(cbMotor, 1, 4);
-        gp.add(lbManager, 0, 5);
-        gp.add(txfManager, 1, 5);
-        gp.add(lbDriver1, 0, 6);
-        gp.add(lbDriver2, 1, 6);
-        gp.add(cbDriver1, 0, 7);
-        gp.add(cbDriver2, 1, 7);
-        gp.add(addDriver, 2, 7);
-        gp.add(editTeam, 0, 8);
-        gp.add(cancel, 1, 8);
+        root.add(lbTeamName, 0, 0);
+        root.add(txfTeamname, 1, 0);
+        root.add(lbColor, 0, 1);
+        root.add(cbColor, 1, 1);
+        root.add(lbCountry, 0, 2);
+        root.add(txfCountry, 1, 2);
+        root.add(lbYear, 0, 3);
+        root.add(dpYear, 1, 3);
+        root.add(lbMotor, 0, 4);
+        root.add(cbMotor, 1, 4);
+        root.add(lbManager, 0, 5);
+        root.add(txfManager, 1, 5);
+        root.add(lbDriver1, 0, 6);
+        root.add(lbDriver2, 1, 6);
+        root.add(cbDriver1, 0, 7);
+        root.add(cbDriver2, 1, 7);
+        root.add(addDriver, 2, 7);
+        root.add(editTeam, 0, 8);
+        root.add(cancel, 1, 8);
 
         addDriver.setOnAction(e -> {
             new AddDriver(new Stage(), cbDriver1, cbDriver2);

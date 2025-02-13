@@ -3,8 +3,6 @@ package com.lorenzo.raceteamcreator_bp02.PopUp;
 import com.lorenzo.raceteamcreator_bp02.classes.Database;
 import com.lorenzo.raceteamcreator_bp02.classes.Drivers;
 import com.lorenzo.raceteamcreator_bp02.classes.TeamController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -39,7 +37,7 @@ public class AddDriver {
         txtDriver.setId("txtDriver");
         btnAdd.setId("btnAdd");
 
-        String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/addDriver.css").toExternalForm();
+        String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/AddDriver.css").toExternalForm();
         Scene = new Scene(root, 300, 100);
         Scene.getStylesheets().add(css);
 

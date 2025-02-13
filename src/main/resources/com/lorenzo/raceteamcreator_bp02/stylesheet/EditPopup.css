@@ -1,0 +1,42 @@
+#root{
+    -fx-background-color: linear-gradient(to bottom, #00106c, #424242);
+    -fx-padding: 20;
+}
+
+#lbTeamName, #lbColor, #lbCountry, #lbYear, #lbMotor, #lbManager, #lbDriver1, #lbDriver2{
+    -fx-text-fill: #FFF;
+    -fx-font-size: 15;
+}
+
+#editTeam{
+    -fx-background-color: #4672ff;
+    -fx-border-color: #000000;
+    -fx-text-fill: #1f3a36;
+}
+
+#editTeam:hover{
+    -fx-background-color: #1f3a36;
+    -fx-text-fill: #4672ff;
+}
+
+#cancel{
+    -fx-background-color: #4672ff;
+    -fx-border-color: #000000;
+    -fx-text-fill: #1f3a36;
+}
+
+#cancel:hover{
+    -fx-background-color: #1f3a36;
+    -fx-text-fill: #4672ff;
+}
+
+#addDriver{
+    -fx-background-color: #4672ff;
+    -fx-border-color: #000000;
+    -fx-text-fill: #1f3a36;
+}
+
+#addDriver:hover{
+    -fx-background-color: #1f3a36;
+    -fx-text-fill: #4672ff;
+}
