@@ -5,6 +5,8 @@ import com.lorenzo.raceteamcreator_bp02.classes.Database;
 import com.lorenzo.raceteamcreator_bp02.classes.Team;
 import com.lorenzo.raceteamcreator_bp02.classes.TeamController;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -12,8 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.sql.ResultSet;
 import java.util.List;
+import java.util.Optional;
 
 public class ShowTeamScreen {
 //    TeamController tc = new TeamController();
@@ -123,6 +125,9 @@ private Pane root = new Pane();
             teamInfoBox.setSpacing(10);
             teamInfoBox.setStyle("-fx-border-color: black; -fx-padding: 10;");
 
+            HBox teamButtons = new HBox();
+            teamButtons.setSpacing(20);
+
             Label teamName = new Label("Name: " + team.getTeamName());
             Label teamColor = new Label("Color: " + team.getTeamColor());
             Label teamCountry = new Label("Country: " + team.getTeamCountry());
@@ -137,12 +142,35 @@ private Pane root = new Pane();
             editIcon.setFitWidth(20);
             editIcon.setFitHeight(20);
 
+            Image delete = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/Delete_icon.png").toExternalForm());
+            ImageView deleteIcon = new ImageView(delete);
+            deleteIcon.setFitWidth(20);
+            deleteIcon.setFitHeight(20);
 
-            teamInfoBox.getChildren().addAll(teamName, teamColor, teamCountry, teamYear, teamMotor, teamDriver1, teamDriver2, teamManager, editIcon);
+            teamInfoBox.getChildren().addAll(teamName, teamColor, teamCountry, teamYear, teamMotor, teamDriver1, teamDriver2, teamManager, teamButtons);
+            teamButtons.getChildren().addAll(editIcon, deleteIcon);
             teamBox.getChildren().add(teamInfoBox);
 
             editIcon.setOnMouseClicked(e -> {
                 new EditPopup(new Stage(), team);
+            });
+
+            deleteIcon.setOnMouseClicked(e -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Are you sure?");
+                alert.setHeaderText("Are you sure you want to delete this?");
+                alert.setContentText("If you delete this you can't get it back");
+
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    try {
+                        tc.deleteTeam(team.getTeamId());
+                        teamBox.getChildren().remove(teamInfoBox);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
             });
         }
 
@@ -156,9 +184,6 @@ private Pane root = new Pane();
 
         teamBox.setId("teamBox");
         root.getChildren().add(scrollPane);
-
-
     }
-
-    }
+}
 

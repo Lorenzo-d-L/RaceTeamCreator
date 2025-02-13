@@ -47,10 +47,6 @@ public class AddDriver {
                 tc.saveDriver(txtDriver.getText());
                 cbDriver1.getItems().addAll(tc.getCoureurs());
                 cbDriver2.getItems().addAll(tc.getCoureurs());
-
-
-
-
                 AddDriverStage.close();
             } catch (Exception exception) {
                 exception.printStackTrace();
