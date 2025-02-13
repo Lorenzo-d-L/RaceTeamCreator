@@ -34,7 +34,17 @@ public class AddDriver {
         txtDriver = new TextField();
         btnAdd = new Button("Add Driver");
 
-        Scene = new Scene(root, 300, 200);
+        root.setId("root");
+        lbName.setId("lbName");
+        txtDriver.setId("txtDriver");
+        btnAdd.setId("btnAdd");
+
+        String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/addDriver.css").toExternalForm();
+        Scene = new Scene(root, 300, 100);
+        Scene.getStylesheets().add(css);
+
+        root.setHgap(10);
+        root.setVgap(5);
 
         root.add(lbName, 0, 0);
         root.add(txtDriver, 1, 0);

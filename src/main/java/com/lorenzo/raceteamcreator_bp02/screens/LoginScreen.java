@@ -23,7 +23,6 @@ public class LoginScreen {
     private Label title = new Label("Login");
     private TextField username = new TextField();
     private PasswordField password = new PasswordField();
-    private Object User;
     private Button login = new Button("Login");
     private Button register = new Button("Register");
     private Database db = new Database();

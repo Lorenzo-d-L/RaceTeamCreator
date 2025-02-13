@@ -61,7 +61,31 @@ public class EditPopup {
         db = new Database();
         tc = new TeamController(db);
 
-        editScene = new Scene(gp, 400, 400);
+        lbTeamname.setId("lbTeamname");
+        txfTeamname.setId("txfTeamname");
+        lbColor.setId("lbColor");
+        cbColor.setId("cbColor");
+        lbCountry.setId("lbCountry");
+        txfCountry.setId("txfCountry");
+        lbYear.setId("lbYear");
+        dpYear.setId("dpYear");
+        lbMotor.setId("lbMotor");
+        cbMotor.setId("cbMotor");
+        lbManager.setId("lbManager");
+        txfManager.setId("txfManager");
+        lbDriver1.setId("lbDriver1");
+        cbDriver1.setId("cbDriver1");
+        lbDriver2.setId("lbDriver2");
+        cbDriver2.setId("cbDriver2");
+        addDriver.setId("addDriver");
+        editTeam.setId("editTeam");
+        cancel.setId("cancel");
+        gp.setId("gp");
+
+
+        String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/addDriver.css").toExternalForm();
+        editScene = new Scene(gp, 400, 300);
+        editScene.getStylesheets().add(css);
 
         try {
             cbDriver1.getItems().addAll(tc.getCoureurs());
@@ -77,6 +101,8 @@ public class EditPopup {
             throw new RuntimeException(e);
         }
 
+        gp.setHgap(5);
+        gp.setVgap(5);
 
         gp.add(lbTeamname, 0, 0);
         gp.add(txfTeamname, 1, 0);

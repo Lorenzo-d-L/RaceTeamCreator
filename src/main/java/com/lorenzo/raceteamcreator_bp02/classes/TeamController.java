@@ -107,7 +107,9 @@ public class TeamController {
         try {
             this.stm.execute("DELETE FROM team_coureur WHERE team_id = " + team_id);
             this.stm.execute("DELETE FROM teams WHERE team_id = " + team_id);
+            System.out.println("Team deleted");
         } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
             throw new Exception("Error: " + e.getMessage());
         }
     }

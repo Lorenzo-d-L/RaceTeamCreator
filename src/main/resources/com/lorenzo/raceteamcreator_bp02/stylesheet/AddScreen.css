@@ -1,0 +1,41 @@
+#nav{
+    -fx-background-color: #4672ff;
+    -fx-background-radius: 0;
+    -fx-border-color: #000000;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 0;
+}
+
+#root{
+    -fx-background-color: linear-gradient(to bottom, #00106c, #424242);
+    -fx-padding: 20;
+}
+
+#grid{
+    -fx-background-color: #4672ff;
+    -fx-padding: 20;
+}
+
+#txtName, #cbColor, #txtManager, #cbDriver1, #cbDriver2, #txtCountry, #dpYear, #cbMotor{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+}
+
+#lbName, #lbColor, #lbManager, #lbDriver1, #lbDriver2, #lbCountry, #lbYear, #lbMotor{
+    -fx-text-fill: #FFF;
+    -fx-font-size: 15;
+}
+
+#btnAdd{
+    -fx-background-color: #424242;
+    -fx-border-color: #000000;
+    -fx-text-fill: #4672ff;
+    -fx-font-size: 15;
+}
+
+#btnAdd:hover{
+    -fx-background-color: #4672ff;
+    -fx-text-fill: #424242;
+}

@@ -18,26 +18,26 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class AddScreen {
-    private Pane container = new Pane();
-    private GridPane grid = new GridPane();
-    private Label title = new Label("Add Screen");
-    private Label lbName = new Label("Team Name");
-    private TextField txtName = new TextField();
-    private Label lbColor = new Label("Team Color");
+    private Pane root;
+    private GridPane grid;
+    private Label title;
+    private Label lbName;
+    private TextField txtName ;
+    private Label lbColor;
     private ComboBox<Kleur> cbColor;
-    private Label lbCountry = new Label("Country");
-    private TextField txtCountry = new TextField();
-    private Label lbYear = new Label("Year");
+    private Label lbCountry;
+    private TextField txtCountry;
+    private Label lbYear;
     private DatePicker dpYear;
-    private Label lbMotor = new Label("Motorleverancier");
+    private Label lbMotor;
     private ComboBox<MotorLeverancier> cbMotor;
-    private Label lbDriver = new Label("Driver1");
+    private Label lbDriver;
     private ComboBox<Drivers> cbDriver1;
-    private Label lbDriver2 = new Label("Driver2");
+    private Label lbDriver2;
     private ComboBox<Drivers> cbDriver2;
-    private Label lbManager = new Label("Manager");
-    private TextField txtManager = new TextField();
-    private Button btnAdd = new Button("Team Toevoegen");
+    private Label lbManager;
+    private TextField txtManager;
+    private Button btnAdd;
     private Button btnAddDriver;
     private VBox nav;
     private HBox home;
@@ -49,25 +49,68 @@ public class AddScreen {
     private TeamController tc;
 
     public AddScreen(Stage addStage) throws Exception {
+        root = new Pane();
+        grid = new GridPane();
+        title = new Label("Add a new team");
+        lbName = new Label("Name:");
+        txtName = new TextField();
+        lbColor = new Label("Color:");
+        cbColor = new ComboBox<Kleur>();
+        lbCountry = new Label("Country:");
+        txtCountry = new TextField();
+        lbYear = new Label("Year:");
         dpYear = new DatePicker();
+        lbMotor = new Label("Motor:");
+        cbMotor = new ComboBox<MotorLeverancier>();
+        lbDriver = new Label("Driver 1:");
+        cbDriver1 = new ComboBox<Drivers>();
+        lbDriver2 = new Label("Driver 2:");
+        cbDriver2 = new ComboBox<Drivers>();
+        lbManager = new Label("Manager:");
+        txtManager = new TextField();
+        btnAdd = new Button("Add");
         nav = new VBox();
         home = new HBox();
         createTeam = new HBox();
         showAllTeams = new HBox();
         icon = new VBox();
-        cbDriver1 = new ComboBox<Drivers>();
-        cbDriver2 = new ComboBox<Drivers>();
-        cbMotor = new ComboBox<MotorLeverancier>();
-        cbColor = new ComboBox<Kleur>();
         db = new Database();
         tc = new TeamController(db);
+
+        root.setId("root");
+        grid.setId("grid");
+        title.setId("title");
+        dpYear.setId("dpYear");
+        lbName.setId("lbName");
+        txtName.setId("txtName");
+        lbColor.setId("lbColor");
+        cbColor.setId("cbColor");
+        lbCountry.setId("lbCountry");
+        txtCountry.setId("txtCountry");
+        lbYear.setId("lbYear");
+        lbMotor.setId("lbMotor");
+        cbMotor.setId("cbMotor");
+        lbDriver.setId("lbDriver");
+        cbDriver1.setId("cbDriver1");
+        lbDriver2.setId("lbDriver2");
+        cbDriver2.setId("cbDriver2");
+        lbManager.setId("lbManager");
+        txtManager.setId("txtManager");
+        btnAdd.setId("btnAdd");
+        nav.setId("nav");
+        home.setId("home");
+        createTeam.setId("createTeam");
+        showAllTeams.setId("showAllTeams");
+        icon.setId("icon");
 
         cbDriver1.getItems().addAll(tc.getCoureurs());
         cbDriver2.getItems().addAll(tc.getCoureurs());
         cbMotor.getItems().addAll(tc.getMotorLeveranciers());
         cbColor.getItems().addAll(tc.getKleuren());
 
-        Scene scene = new Scene(container, 800, 600);
+        String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/AddScreen.css").toExternalForm();
+        Scene scene = new Scene(root, 800, 600);
+        scene.getStylesheets().add(css);
 
 
         btnAddDriver = new Button("+");
@@ -92,8 +135,9 @@ public class AddScreen {
         showAllTeams.setMaxSize(50,50);
 
        grid.setPrefSize(400, 300);
-       grid.setLayoutX(200);
-       grid.setLayoutY(150);
+       grid.setLayoutX(250);
+       grid.setLayoutY(75);
+       grid.setVgap(5);
 
         grid.add(lbName, 0, 0);
         grid.add(txtName, 0, 1);
@@ -156,12 +200,14 @@ public class AddScreen {
                             ((Drivers)cbDriver1.getValue()).getName(),
                             ((Drivers)cbDriver2.getValue()).getName(),
                             txtManager.getText());
+
+                new HomeScreen(addStage);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
 
-        container.getChildren().addAll(grid, nav, icon);
+        root.getChildren().addAll(grid, nav, icon);
         nav.getChildren().addAll(home, showAllTeams, createTeam);
         icon.getChildren().add(imageView);
         home.getChildren().add(homeButton);
@@ -184,4 +230,35 @@ public class AddScreen {
         }
     }
 
+//    public void setId( ){
+//        root.setId("root");
+//        grid.setId("grid");
+//        title.setId("title");
+//        dpYear.setId("dpYear");
+//        lbName.setId("lbName");
+//        txtName.setId("txtName");
+//        lbColor.setId("lbColor");
+//        cbColor.setId("cbColor");
+//        lbCountry.setId("lbCountry");
+//        txtCountry.setId("txtCountry");
+//        lbYear.setId("lbYear");
+//        lbMotor.setId("lbMotor");
+//        cbMotor.setId("cbMotor");
+//        lbDriver.setId("lbDriver");
+//        cbDriver1.setId("cbDriver1");
+//        lbDriver2.setId("lbDriver2");
+//        cbDriver2.setId("cbDriver2");
+//        lbManager.setId("lbManager");
+//        txtManager.setId("txtManager");
+//        btnAdd.setId("btnAdd");
+//        btnAddDriver.setId("btnAddDriver");
+//        nav.setId("nav");
+//        home.setId("home");
+//        createTeam.setId("createTeam");
+//        showAllTeams.setId("showAllTeams");
+//        icon.setId("icon");
+//    }
+
 }
+
+

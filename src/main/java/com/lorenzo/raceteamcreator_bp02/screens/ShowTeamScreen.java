@@ -89,6 +89,7 @@ private Pane root = new Pane();
         icon.setId("icon");
         title.setId("title");
 
+        scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
         String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/ShowTeamScreen.css").toExternalForm();
         scene.getStylesheets().add(css);
 
@@ -122,6 +123,8 @@ private Pane root = new Pane();
 
         for (Team team : teams) {
             VBox teamInfoBox = new VBox();
+            teamInfoBox.setId("teamInfoBox");
+            teamInfoBox.setPrefSize(300, 75);
             teamInfoBox.setSpacing(10);
             teamInfoBox.setStyle("-fx-border-color: black; -fx-padding: 10;");
 

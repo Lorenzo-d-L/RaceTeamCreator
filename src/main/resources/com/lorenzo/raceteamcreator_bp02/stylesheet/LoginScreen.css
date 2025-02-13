@@ -1,14 +1,42 @@
 VBox{
-    -fx-background-color: #dc1010;
+    -fx-background-color: linear-gradient(to bottom, #00106c, #424242);
     -fx-alignment: center;
     -fx-padding: 20;
 }
 
 #username, #password{
-    -fx-background-color: #f0f0f0;
+    -fx-background-color: #4672ff;
     -fx-border-color: #000000;
     -fx-border-width: 1;
     -fx-border-radius: 5;
+}
+
+#login{
+    -fx-background-color: #4672ff;
+    -fx-border-color: #000000;
+    -fx-text-fill: #1f3a36;
+}
+
+#login:hover{
+    -fx-background-color: #1f3a36;
+    -fx-text-fill: #4672ff;
+}
+
+#register{
+    -fx-background-color: #4672ff;
+    -fx-border-color: #000000;
+    -fx-text-fill: #1f3a36;
+}
+
+#register:hover{
+    -fx-background-color: #1f3a36;
+    -fx-text-fill: #4672ff;
+}
+
+#title{
+    -fx-text-fill: #FFF;
+    -fx-font-family: "Racing Sans One";
+    -fx-font-size: 30;
 }
 
 #darkOverlay {
