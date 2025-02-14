@@ -20,22 +20,15 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
-    public void registerUser(LoginScreen loginScreen) {
-        String email = loginScreen.getEmail();
-        String password = loginScreen.getPassword();
-        if (email == null|| email.trim().isEmpty() || !email.contains("@" ) && !email.contains(".") && password == null || password.trim().isEmpty()) {
-            System.out.println("Please enter an email");
+    public void registerUser(String email, String password) {
+        try {
+            String query = "INSERT INTO login (email, password) VALUES ('" + email + "', '" + password + "')";
+            stm.executeUpdate(query);
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Password or email is empty");
-            alert.showAndWait();
-            return;
-        }
-        try {
-            stm.executeUpdate("INSERT INTO login (email, password) VALUES ('" + email + "', '" + password + "')");
-            System.out.println("User registered");
-        }catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            alert.setHeaderText("Email already exists");
+            alert.show();
         }
     }
 

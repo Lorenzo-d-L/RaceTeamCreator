@@ -75,7 +75,9 @@ public class LoginScreen {
         });
 
         register.setOnAction(e -> {
-            uc.registerUser(this);
+            uc.setEmail(username.getText());
+            uc.setPassword(password.getText());
+            uc.registerUser(username.getText(), password.getText());
         });
 
         LoginStage.setResizable(false);
