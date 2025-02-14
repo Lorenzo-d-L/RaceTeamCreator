@@ -72,7 +72,6 @@ public class LoginScreen {
             }else{
                 System.out.println("User not logged in");
             }
-            new HomeScreen(LoginStage);
         });
 
         register.setOnAction(e -> {

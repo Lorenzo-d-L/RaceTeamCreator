@@ -1,6 +1,7 @@
 package com.lorenzo.raceteamcreator_bp02.classes;
 
 import com.lorenzo.raceteamcreator_bp02.screens.LoginScreen;
+import javafx.scene.control.Alert;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,9 +25,12 @@ public class UserController {
         String password = loginScreen.getPassword();
         if (email == null|| email.trim().isEmpty() || !email.contains("@" ) && !email.contains(".") && password == null || password.trim().isEmpty()) {
             System.out.println("Please enter an email");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Password or email is empty");
+            alert.showAndWait();
             return;
         }
-
         try {
             stm.executeUpdate("INSERT INTO login (email, password) VALUES ('" + email + "', '" + password + "')");
             System.out.println("User registered");
@@ -40,7 +44,10 @@ public class UserController {
             String query = "SELECT * FROM login WHERE email = '" + email + "' AND password = '" + password + "'";
             return stm.executeQuery(query).next();
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Email or password is incorrect");
+            alert.show();
             return false;
         }
     }
