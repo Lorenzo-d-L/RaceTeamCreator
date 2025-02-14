@@ -150,7 +150,7 @@ private Pane root = new Pane();
             deleteIcon.setFitWidth(20);
             deleteIcon.setFitHeight(20);
 
-            teamInfoBox.getChildren().addAll(teamName, teamColor, teamCountry, teamYear, teamMotor, teamDriver1, teamDriver2, teamManager, teamButtons);
+            teamInfoBox.getChildren().addAll(teamName, teamColor, teamCountry, teamYear, teamMotor, teamManager, teamDriver1, teamDriver2, teamButtons);
             teamButtons.getChildren().addAll(editIcon, deleteIcon);
             teamBox.getChildren().add(teamInfoBox);
 
@@ -180,9 +180,9 @@ private Pane root = new Pane();
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(teamBox);
         scrollPane.setFitToWidth(true);
-        scrollPane.setLayoutX(150);
-        scrollPane.setLayoutY(100);
-        scrollPane.setPrefViewportHeight(550);
+        scrollPane.setLayoutX(125);
+        scrollPane.setLayoutY(50);
+        scrollPane.setPrefViewportHeight(500);
         scrollPane.setPrefViewportWidth(650);
 
         teamBox.setId("teamBox");

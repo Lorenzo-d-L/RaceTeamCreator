@@ -52,8 +52,10 @@ public class AddDriver {
             db = new Database();
             tc = new TeamController(db);
             try {
-                tc.saveDriver(txtDriver.getText());
+                tc.saveDriver(txtDriver.getText(), cbDriver1);
+                cbDriver1.getItems().clear();
                 cbDriver1.getItems().addAll(tc.getCoureurs());
+                cbDriver2.getItems().clear();
                 cbDriver2.getItems().addAll(tc.getCoureurs());
                 AddDriverStage.close();
             } catch (Exception exception) {

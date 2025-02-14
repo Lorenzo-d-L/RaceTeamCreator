@@ -31,7 +31,7 @@ public class AddScreen {
     private DatePicker dpYear;
     private Label lbMotor;
     private ComboBox<MotorLeverancier> cbMotor;
-    private Label lbDriver;
+    private Label lbDriver1;
     private ComboBox<Drivers> cbDriver1;
     private Label lbDriver2;
     private ComboBox<Drivers> cbDriver2;
@@ -62,7 +62,7 @@ public class AddScreen {
         dpYear = new DatePicker();
         lbMotor = new Label("Motor:");
         cbMotor = new ComboBox<MotorLeverancier>();
-        lbDriver = new Label("Driver 1:");
+        lbDriver1 = new Label("Driver 1:");
         cbDriver1 = new ComboBox<Drivers>();
         lbDriver2 = new Label("Driver 2:");
         cbDriver2 = new ComboBox<Drivers>();
@@ -90,7 +90,7 @@ public class AddScreen {
         lbYear.setId("lbYear");
         lbMotor.setId("lbMotor");
         cbMotor.setId("cbMotor");
-        lbDriver.setId("lbDriver");
+        lbDriver1.setId("lbDriver1");
         cbDriver1.setId("cbDriver1");
         lbDriver2.setId("lbDriver2");
         cbDriver2.setId("cbDriver2");
@@ -151,7 +151,7 @@ public class AddScreen {
         grid.add(cbMotor, 0, 9);
         grid.add(lbManager, 0, 11);
         grid.add(txtManager, 0, 12);
-        grid.add(lbDriver, 0, 13);
+        grid.add(lbDriver1, 0, 13);
         grid.add(lbDriver2, 1, 13);
         grid.add(cbDriver1, 0, 14);
         grid.add(cbDriver2, 1, 14);

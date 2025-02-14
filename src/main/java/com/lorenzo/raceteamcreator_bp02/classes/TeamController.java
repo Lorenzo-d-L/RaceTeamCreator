@@ -3,6 +3,7 @@ package com.lorenzo.raceteamcreator_bp02.classes;
 import com.lorenzo.raceteamcreator_bp02.PopUp.AddDriver;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 
@@ -49,17 +50,32 @@ public class TeamController {
         }
     }
 
-    public void saveDriver(String txtDriver) throws Exception {
+    public void saveDriver(String txtDriver, ComboBox<Drivers> comboBox) throws Exception {
         try {
             ResultSet rs = this.stm.executeQuery("SELECT COUNT(*) AS count FROM coureur WHERE naam = '" + txtDriver + "'");
             if (rs.next() && rs.getInt("count") > 0) {
                 throw new Exception("Driver already exists");
             }
             this.stm.execute("INSERT INTO coureur (naam) VALUES ('" + txtDriver + "')");
+            updateDrivers(comboBox);
         } catch (Exception e) {
-            throw new Exception("Error: " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error adding driver");
+            alert.setContentText("Driver already exists");
+            alert.showAndWait();
         }
     }
+
+    private void updateDrivers(ComboBox<Drivers> comboBox) {
+        try {
+            comboBox.getItems().clear();
+            comboBox.getItems().addAll(getCoureurs());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public ObservableList<Drivers> getCoureurs() throws Exception {
         try {
@@ -103,10 +119,10 @@ public class TeamController {
         }
     }
 
-    public void deleteTeam(int team_id) throws Exception {
+    public void deleteTeam(int getTeamId) throws Exception {
         try {
-            this.stm.execute("DELETE FROM team_coureur WHERE team_id = " + team_id);
-            this.stm.execute("DELETE FROM teams WHERE team_id = " + team_id);
+            this.stm.execute("DELETE FROM team_coureur WHERE team_id = " + getTeamId);
+            this.stm.execute("DELETE FROM teams WHERE teams.team_id = " + getTeamId);
             System.out.println("Team deleted");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -122,6 +138,7 @@ public class TeamController {
                 String teamYearString = rs.getString("team_jaar");
                 LocalDate teamYear = LocalDate.parse(teamYearString);
                 Team team = new Team(
+                        rs.getInt("team_id"),
                         rs.getString("teamnaam"),
                         rs.getString("kleur"),
                         rs.getString("team_land"),
@@ -141,13 +158,15 @@ public class TeamController {
 
     public void updateTeam(int team_id, String teamName, ComboBox<Kleur> teamColor, String teamCountry, DatePicker teamYear, ComboBox<MotorLeverancier> teamMotor, ComboBox<Drivers> teamDriver1, ComboBox<Drivers> teamDriver2, String teamManager) throws Exception {
         try {
+            int teamd = team_id;
             String color = teamColor.getValue().getName();
             String year = teamYear.getValue().toString();
             String motor = teamMotor.getValue().getName();
             String driver1 = teamDriver1.getValue().getName();
             String driver2 = teamDriver2.getValue().getName();
 
-            this.stm.executeUpdate("UPDATE teams SET teamnaam = '" + teamName + "', kleur = '" + color + "', team_land = '" + teamCountry + "', team_jaar = '" + year + "', motor_leverancier = '" + motor + "', team_manager = '" + teamManager + "', coureur1 = '" + driver1 + "', coureur2 = '" + driver2 + "' WHERE team_id = " + team_id);        } catch (Exception e) {
+            this.stm.executeUpdate("UPDATE teams SET teamnaam = '" + teamName + "', kleur = '" + color + "', team_land = '" + teamCountry + "', team_jaar = '" + year + "', motor_leverancier = '" + motor + "', team_manager = '" + teamManager + "', coureur1 = '" + driver1 + "', coureur2 = '" + driver2 + "' WHERE team_id = " + teamd);
+            } catch (Exception e) {
             throw new Exception("Error: " + e.getMessage());
         }
     }

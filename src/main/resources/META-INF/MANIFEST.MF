@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: com.lorenzo.raceteamcreator_bp02.Launcher
+

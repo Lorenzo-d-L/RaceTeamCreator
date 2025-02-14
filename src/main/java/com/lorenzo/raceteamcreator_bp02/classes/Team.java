@@ -3,6 +3,7 @@ package com.lorenzo.raceteamcreator_bp02.classes;
 import java.time.LocalDate;
 
 public class Team {
+    private int teamId;
     private String teamName;
     private String teamColor;
     private String teamCountry;
@@ -12,7 +13,8 @@ public class Team {
     private String teamDriver2;
     private String teamManager;
 
-    public Team(String teamName, String teamColor, String teamCountry, LocalDate teamYear, String teamMotor, String teamDriver1, String teamDriver2, String teamManager) {
+    public Team(int teamId, String teamName, String teamColor, String teamCountry, LocalDate teamYear, String teamMotor, String teamDriver1, String teamDriver2, String teamManager) {
+        this.teamId = teamId;
         this.teamName = teamName;
         this.teamColor = teamColor;
         this.teamCountry = teamCountry;
@@ -89,6 +91,6 @@ public class Team {
 
 
     public int getTeamId() {
-        return 0;
+        return teamId;
     }
 }
