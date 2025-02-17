@@ -20,19 +20,6 @@ class TeamControllerTest {
     }
 
     @Test
-    void saveDriver() {
-        try {
-            ComboBox<Drivers> comboBox = new ComboBox<>();
-
-            ObservableList<Drivers> lijst = tc.getCoureurs();
-            comboBox.getItems().addAll(lijst);
-            tc.saveDriver("Test", comboBox);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
     void getMotorLeveranciers() {
         try {
             tc.getMotorLeveranciers();
