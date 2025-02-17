@@ -3,15 +3,12 @@ package com.lorenzo.raceteamcreator_bp02.screens;
 import com.lorenzo.raceteamcreator_bp02.classes.Database;
 import com.lorenzo.raceteamcreator_bp02.classes.UserController;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 import java.sql.Connection;
 
@@ -70,14 +67,21 @@ public class LoginScreen {
                 System.out.println("User logged in");
                 new HomeScreen(LoginStage);
             }else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Login");
+                alert.setHeaderText("Login failed");
+                alert.setContentText("username or password incorrect, please try again");
+                alert.showAndWait();
                 System.out.println("User not logged in");
             }
         });
 
         register.setOnAction(e -> {
-            uc.setEmail(username.getText());
-            uc.setPassword(password.getText());
-            uc.registerUser(username.getText(), password.getText());
+           uc.registerUser(username.getText(), password.getText());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Register");
+            alert.setHeaderText("User registered");
+            alert.setContentText("User has been registered");
         });
 
         LoginStage.setResizable(false);

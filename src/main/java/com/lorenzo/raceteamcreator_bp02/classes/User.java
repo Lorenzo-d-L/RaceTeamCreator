@@ -1,5 +1,7 @@
 package com.lorenzo.raceteamcreator_bp02.classes;
 
+import java.security.MessageDigest;
+
 public class User {
     private int userId;
     private String email;
@@ -30,6 +32,5 @@ public class User {
     public int getUserId() {
         return userId;
     }
-
 
 }

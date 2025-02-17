@@ -7,8 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserController {
-    private Object email;
-    private Object password;
+    private User user;
     Database db = new Database();
     Statement stm;
 
@@ -20,37 +19,45 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
-    public void registerUser(String email, String password) {
+    public void registerUser( String email, String password) {
+        user = new User(0, email, password);
         try {
-            String query = "INSERT INTO login (email, password) VALUES ('" + email + "', '" + password + "')";
+            String query = "INSERT INTO login (email, password) VALUES ('" + user.getEmail() + "', '" + user.getPassword() + "')";
             stm.executeUpdate(query);
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Email already exists");
-            alert.show();
+            System.out.println(e);
         }
     }
 
     public boolean loginUser() {
+        user = new User(0, user.getEmail(), user.getPassword());
         try {
-            String query = "SELECT * FROM login WHERE email = '" + email + "' AND password = '" + password + "'";
+            String query = "SELECT * FROM login WHERE email = '" + user.getEmail() + "' AND password = '" + user.getPassword() + "'";
             return stm.executeQuery(query).next();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Email or password is incorrect");
-            alert.show();
+            System.out.println(e);
             return false;
         }
     }
 
-    public void setEmail(Object email) {
-        this.email = email;
+    public void setEmail(String email) {
+        if (user == null) {
+            user = new User(0, email, "");
+        } else {
+            user.setEmail(email);
+        }
     }
 
-    public void setPassword(Object password) {
-        this.password = password;
+    public void setPassword(String password) {
+        if (user == null) {
+            user = new User(0, "", password);
+        } else {
+            user.setPassword(password);
+        }
+    }
+
+    public User getUser() {
+        return user;
     }
 }
 
