@@ -17,4 +17,5 @@
 #btnAdd:hover{
     -fx-background-color: #1f3a36;
     -fx-text-fill: #4672ff;
+    -fx-cursor: hand;
 }

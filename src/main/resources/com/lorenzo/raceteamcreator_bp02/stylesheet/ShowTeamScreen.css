@@ -33,3 +33,7 @@ Pane{
     -fx-font-family: "Racing Sans One";
     -fx-font-size: 15;
 }
+
+ImageView:hover{
+    -fx-cursor: hand;
+}

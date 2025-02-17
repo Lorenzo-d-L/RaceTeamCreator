@@ -81,21 +81,6 @@ public class AddScreen {
         grid.setId("grid");
         title.setId("title");
         dpYear.setId("dpYear");
-        lbName.setId("lbName");
-        txtName.setId("txtName");
-        lbColor.setId("lbColor");
-        cbColor.setId("cbColor");
-        lbCountry.setId("lbCountry");
-        txtCountry.setId("txtCountry");
-        lbYear.setId("lbYear");
-        lbMotor.setId("lbMotor");
-        cbMotor.setId("cbMotor");
-        lbDriver1.setId("lbDriver1");
-        cbDriver1.setId("cbDriver1");
-        lbDriver2.setId("lbDriver2");
-        cbDriver2.setId("cbDriver2");
-        lbManager.setId("lbManager");
-        txtManager.setId("txtManager");
         btnAdd.setId("btnAdd");
         nav.setId("nav");
         home.setId("home");
@@ -111,7 +96,6 @@ public class AddScreen {
         String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/AddScreen.css").toExternalForm();
         Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add(css);
-
 
         btnAddDriver = new Button("+");
         tp = new Tooltip("Add a new driver");
@@ -191,6 +175,15 @@ public class AddScreen {
         });
 
         btnAdd.setOnAction(e -> {
+            if (txtName.getText().isEmpty() || txtCountry.getText().isEmpty() || txtManager.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText("Empty fields");
+                alert.setContentText("Please fill in all fields");
+                alert.showAndWait();
+                return;
+            }
+
             try {
                 tc.saveTeam(txtName.getText(),
                             ((Kleur)cbColor.getValue()).getName(),

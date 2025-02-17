@@ -46,4 +46,13 @@ class UserControllerTest {
             fail("This should not have thrown an exception");
         };
     }
+
+    @Test
+    void setEmailEmpty() {
+        try {
+            uc.setEmail("");
+        }catch (Exception e){
+            fail("This should not have thrown an exception");
+        };
+    }
 }

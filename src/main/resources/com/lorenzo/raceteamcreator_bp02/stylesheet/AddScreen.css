@@ -17,13 +17,17 @@
     -fx-padding: 20;
 }
 
-.Text-Field, .ComboBox{
+Text-Field, ComboBox{
     -fx-background-color: #ffffff;
-    -fx-border-color: #000000;
     -fx-border-width: 1;
 }
 
-.Label{
+#dpYear{
+    -fx-background-color: #ffffff;
+    -fx-border-width: 1;
+}
+
+Label{
     -fx-text-fill: #FFF;
     -fx-font-size: 15;
 }
@@ -38,4 +42,9 @@
 #btnAdd:hover{
     -fx-background-color: #4672ff;
     -fx-text-fill: #424242;
+    -fx-cursor: hand;
+}
+
+ImageView:hover{
+    -fx-cursor: hand;
 }

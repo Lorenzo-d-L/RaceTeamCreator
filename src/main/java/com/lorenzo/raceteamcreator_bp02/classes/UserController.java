@@ -20,6 +20,23 @@ public class UserController {
         }
     }
     public void registerUser( String email, String password) {
+        if (email.isEmpty() || password.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Empty fields");
+            alert.setContentText("Please fill in all fields");
+            alert.showAndWait();
+            return;
+        }
+
+        if (!email.contains("@") && !email.contains(".")){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid email");
+            alert.setContentText("Please enter a valid email");
+            alert.showAndWait();
+            return;
+        }
         user = new User(0, email, password);
         try {
             String query = "INSERT INTO login (email, password) VALUES ('" + user.getEmail() + "', '" + user.getPassword() + "')";

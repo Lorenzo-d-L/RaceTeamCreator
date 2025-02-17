@@ -21,3 +21,7 @@ Pane{
     -fx-background-color: #fd0b0b;
     -fx-padding: 20;
 }
+
+ImageView:hover{
+    -fx-cursor: hand;
+}

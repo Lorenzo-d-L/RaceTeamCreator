@@ -20,6 +20,7 @@ VBox{
 #login:hover{
     -fx-background-color: #1f3a36;
     -fx-text-fill: #4672ff;
+    -fx-cursor: hand;
 }
 
 #register{
@@ -31,6 +32,7 @@ VBox{
 #register:hover{
     -fx-background-color: #1f3a36;
     -fx-text-fill: #4672ff;
+    -fx-cursor: hand;
 }
 
 #title{
