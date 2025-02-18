@@ -1,12 +1,12 @@
 # RaceTeamCreator
 
-![Hoofdlogo](C:\Users\loren\Desktop\Opleiding informatica\Leerjaar 1\Periode 2\Beroepsproduct\Broepsproduct\RaceTeamCreator\src\main\resources\com\lorenzo\raceteamcreator_bp02\icons\HoofdLogo.png)
-
 ## Project Overview
 
 The RaceTeamCreator application helps users create, manage, and organize racing teams efficiently. It provides a user-friendly interface to handle team information, including drivers, cars, and performance statistics. The primary functionality of the application is to add, edit, or delete teams.
 
 ## Installation Instructions
+
+Here are the steps to install and run the RaceTeamCreator application on your local machine.
 
 ### Prerequisites
 
