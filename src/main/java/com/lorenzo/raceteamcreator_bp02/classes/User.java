@@ -7,12 +7,14 @@ public class User {
     private String email;
     private String password;
 
+    // Constructor for the user
     public User(int userId, String username, String password) {
         this.userId = userId;
         this.email = username;
         this.password = password;
     }
 
+    // Below are the getters for the user
     public String getEmail() {
         return email;
     }
@@ -27,10 +29,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getUserId() {
-        return userId;
     }
 
 }

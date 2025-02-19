@@ -1,13 +1,12 @@
 package com.lorenzo.raceteamcreator_bp02;
 
 import com.lorenzo.raceteamcreator_bp02.screens.LoginScreen;
-import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Launcher extends Application {
+public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
         new LoginScreen(stage);

@@ -10,7 +10,7 @@ Here are the steps to install and run the RaceTeamCreator application on your lo
 
 ### Prerequisites
 
-* Java Development Kit (JDK) 17 or higher
+* Java 11 or higher
 
 * XAMPP or MAMP for a local database
 

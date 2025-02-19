@@ -76,17 +76,20 @@ public class EditPopup {
         cancel.setId("cancel");
         root.setId("root");
 
-
+        // Add the css file and set the scene
         String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/EditPopup.css").toExternalForm();
         editScene = new Scene(root, 400, 300);
         editScene.getStylesheets().add(css);
 
+        // Add the items to the comboboxes
         try {
+            // Add the items to the comboboxes from the database
             cbDriver1.getItems().addAll(tc.getCoureurs());
             cbDriver2.getItems().addAll(tc.getCoureurs());
             cbMotor.getItems().addAll(tc.getMotorLeveranciers());
             cbColor.getItems().addAll(tc.getKleuren());
 
+            // Set the values of the comboboxes to the values of the team
             cbDriver1.setValue(tc.getDriver(team.getTeamDriver1()));
             cbDriver2.setValue(tc.getDriver(team.getTeamDriver2()));
             cbMotor.setValue(tc.getMotor(team.getTeamMotor()));
@@ -98,6 +101,7 @@ public class EditPopup {
         root.setHgap(5);
         root.setVgap(5);
 
+        // Add the items to the gridpane
         root.add(lbTeamName, 0, 0);
         root.add(txfTeamname, 1, 0);
         root.add(lbColor, 0, 1);
@@ -118,12 +122,15 @@ public class EditPopup {
         root.add(editTeam, 0, 8);
         root.add(cancel, 1, 8);
 
+        // If this button is clicked, a new window will open to add a driver
         addDriver.setOnAction(e -> {
             new AddDriver(new Stage(), cbDriver1, cbDriver2);
         });
 
+        // If this button is clicked, the team will be updated
         editTeam.setOnAction(e -> {
             try {
+                // Update the team in the database and close the window
                 tc.updateTeam(team.getTeamId(),
                         txfTeamname.getText(),
                         cbColor,
@@ -141,11 +148,12 @@ public class EditPopup {
             }
         });
 
+        // If this button is clicked, the window will close
         cancel.setOnAction(e -> {
             editStage.close();
         });
 
-
+        // Set the stage
         editStage.setResizable(false);
         editStage.setTitle("Edit Team");
         editStage.setScene(editScene);

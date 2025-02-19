@@ -18,18 +18,23 @@ import java.util.List;
 import java.util.Optional;
 
 public class ShowTeamScreen {
-//    TeamController tc = new TeamController();
-private Pane root = new Pane();
+private Pane root;
     private Scene scene;
-    private VBox nav = new VBox();
-    private HBox showAllTeams = new HBox();
-    private HBox createTeam = new HBox();
-    private HBox home = new HBox();
-    private VBox icon = new VBox();
+    private VBox nav;
+    private HBox showAllTeams;
+    private HBox createTeam;
+    private HBox home;
+    private VBox icon;
     private TeamController tc;
     private Database db;
 
     public ShowTeamScreen(Stage stage) {
+        root = new Pane();
+        nav = new VBox();
+        showAllTeams = new HBox();
+        createTeam = new HBox();
+        home = new HBox();
+        icon = new VBox();
         db = new Database();
         tc = new TeamController(db);
         scene = new Scene(root, 800, 600);
@@ -37,6 +42,7 @@ private Pane root = new Pane();
         Label title = new Label("Show Team");
         title.setId("title");
 
+        // Set the size of the panes
         icon.setPrefSize(100, 100);
         icon.setMaxSize(100, 100);
 
@@ -54,26 +60,31 @@ private Pane root = new Pane();
         showAllTeams.setPrefSize(50,50);
         showAllTeams.setMaxSize(50,50);
 
+        // Add the logo to the show team screen
         Image logo = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/HoofdLogo.png").toExternalForm());
         ImageView imageView = new ImageView(logo);
         imageView.setFitWidth(100);
         imageView.setFitHeight(100);
 
+        // Add the home button in the show team screen
         Image homeIcon = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/HomeBut.png").toExternalForm());
         ImageView homeButton = new ImageView(homeIcon);
         homeButton.setFitWidth(50);
         homeButton.setFitHeight(50);
 
+        // Add the showAllTeams button in the show team screen
         Image show = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/ShowAll.png").toExternalForm());
         ImageView showAll = new ImageView(show);
         showAll.setFitWidth(50);
         showAll.setFitHeight(50);
 
+        // Add the createTeam button in the show team screen
         Image add = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/Add.png").toExternalForm());
         ImageView addTeam = new ImageView(add);
         addTeam.setFitWidth(50);
         addTeam.setFitHeight(50);
 
+        // Add the items to the panes
         root.getChildren().addAll(nav, icon, title);
         nav.getChildren().addAll(home, showAllTeams, createTeam);
         icon.getChildren().add(imageView);
@@ -89,14 +100,23 @@ private Pane root = new Pane();
         icon.setId("icon");
         title.setId("title");
 
+        // Add the css file and create the scene
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
         String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/ShowTeamScreen.css").toExternalForm();
         scene.getStylesheets().add(css);
 
+        // If this button is clicked, go to the home screen
         home.setOnMouseClicked(e -> {
             new HomeScreen(stage);
         });
 
+        // If this button is clicked, go to the show all teams screen
+        // This button is not needed in the show team screen, but it is added for consistency
+        showAllTeams.setOnMouseClicked(e -> {
+            new ShowTeamScreen(stage);
+        });
+
+        // If this button is clicked, go to the add screen
         addTeam.setOnMouseClicked(e -> {
             try {
                 new AddScreen(stage);
@@ -113,7 +133,9 @@ private Pane root = new Pane();
         showTeams();
         }
 
+        // Show all the teams in the database
     public void showTeams() {
+        // The list data is retrieved from the database
         List<Team> teams = tc.getTeams();
         FlowPane teamBox = new FlowPane();
         teamBox.setLayoutX(150);
@@ -121,6 +143,7 @@ private Pane root = new Pane();
         teamBox.setHgap(10);
         teamBox.setVgap(10);
 
+        // Add the teams to the flowpane to see them
         for (Team team : teams) {
             VBox teamInfoBox = new VBox();
             teamInfoBox.setId("teamInfoBox");
@@ -128,9 +151,11 @@ private Pane root = new Pane();
             teamInfoBox.setSpacing(10);
             teamInfoBox.setStyle("-fx-border-color: black; -fx-padding: 10;");
 
+            // Add the buttons to the team to edit or delete the team
             HBox teamButtons = new HBox();
             teamButtons.setSpacing(20);
 
+            // Add the information of the team to the flowpane
             Label teamName = new Label("Name: " + team.getTeamName());
             Label teamColor = new Label("Color: " + team.getTeamColor());
             Label teamCountry = new Label("Country: " + team.getTeamCountry());
@@ -140,6 +165,7 @@ private Pane root = new Pane();
             Label teamDriver2 = new Label("Driver 2: " + team.getTeamDriver2());
             Label teamManager = new Label("Manager: " + team.getTeamManager());
 
+            // Add the icons to the buttons
             Image edit = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/Edit_icon.png").toExternalForm());
             ImageView editIcon = new ImageView(edit);
             editIcon.setFitWidth(20);
@@ -154,10 +180,13 @@ private Pane root = new Pane();
             teamButtons.getChildren().addAll(editIcon, deleteIcon);
             teamBox.getChildren().add(teamInfoBox);
 
+            // If the user clicks on the edit icon, go to the edit popup
             editIcon.setOnMouseClicked(e -> {
                 new EditPopup(new Stage(), team);
             });
 
+            // If the user clicks on this, there will be an alert to ask if the user is sure to delete the team
+            // If the user clicks on OK, the team will be deleted
             deleteIcon.setOnMouseClicked(e -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Are you sure?");
@@ -166,6 +195,7 @@ private Pane root = new Pane();
 
                 Optional<ButtonType> result = alert.showAndWait();
 
+                // If the user clicks on OK, the team will be deleted
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     try {
                         tc.deleteTeam(team.getTeamId());
@@ -177,6 +207,7 @@ private Pane root = new Pane();
             });
         }
 
+        // Add the flowpane to a scrollpane so the user can scroll through the teams
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(teamBox);
         scrollPane.setFitToWidth(true);

@@ -17,6 +17,7 @@ public class TeamController {
     private Database db;
     private Statement stm;
 
+    // Constructor for the team controller
     public TeamController(Database db) {
         this.db = db;
         try {
@@ -26,6 +27,11 @@ public class TeamController {
         }
     }
 
+    // Save the team to the database with the given values from the textfields and comboboxes
+    // Also save the drivers to the team
+    // If the team already exists, throw an exception
+    // If the team is saved, show an alert
+    // The class team is used to get the values from the textfields and comboboxes
     public void saveTeam(String teamName, String teamColor, String teamCountry, String teamYear, String teamMotor, String teamDriver1, String teamDriver2, String teamManager) throws Exception {
         try {
             this.stm.executeUpdate("INSERT INTO teams (teamnaam, kleur, team_land, team_jaar, motor_leverancier, team_manager, coureur1, coureur2) VALUES ('" + teamName + "', '" + teamColor + "', '" + teamCountry + "', '" + teamYear + "', '" + teamMotor + "', '" + teamManager + "', '" + teamDriver1 + "', '" + teamDriver2 + "')");
@@ -50,6 +56,10 @@ public class TeamController {
         }
     }
 
+    // Save the driver to the database with the given value from the textfield and combobox
+    // If the driver already exists, throw an exception
+    // If the driver is saved, update the combobox
+    // The class drivers will be used to get the value from the textfield
     public void saveDriver(String txtDriver, ComboBox<Drivers> comboBox) throws Exception {
         try {
             ResultSet rs = this.stm.executeQuery("SELECT COUNT(*) AS count FROM coureur WHERE naam = '" + txtDriver + "'");
@@ -67,6 +77,11 @@ public class TeamController {
         }
     }
 
+    // Update the combobox with the drivers from the database
+    // If the drivers are not found, throw an exception
+    // If the drivers are found, update the combobox
+    // The class drivers will be used to get the values from the database
+    // The class observablelist will be used to update the combobox
     private void updateDrivers(ComboBox<Drivers> comboBox) {
         try {
             comboBox.getItems().clear();
@@ -76,7 +91,10 @@ public class TeamController {
         }
     }
 
-
+    // Get the drivers from the database
+    // If the drivers are not found, throw an exception
+    // If the drivers are found, return the drivers
+    // The class drivers will be used to get the values from the database
     public ObservableList<Drivers> getCoureurs() throws Exception {
         try {
             ObservableList<Drivers> coureurs = FXCollections.observableArrayList();
@@ -91,6 +109,10 @@ public class TeamController {
         }
     }
 
+    // Get the motor leveranciers from the database
+    // If the motor leveranciers are not found, throw an exception
+    // If the motor leveranciers are found, return the motor leveranciers
+    // The class motor leverancier will be used to get the values from the database
     public ObservableList<MotorLeverancier> getMotorLeveranciers() throws Exception {
         try {
             ObservableList<MotorLeverancier> motorLeveranciers = FXCollections.observableArrayList();
@@ -105,6 +127,10 @@ public class TeamController {
         }
     }
 
+    // Get the kleuren from the database
+    // If the kleuren are not found, throw an exception
+    // If the kleuren are found, return the kleuren
+    // The class kleur will be used to get the values from the database
     public ObservableList<Kleur> getKleuren() throws Exception {
         try {
             ObservableList<Kleur> kleuren = FXCollections.observableArrayList();
@@ -119,6 +145,7 @@ public class TeamController {
         }
     }
 
+    // Delete the team from the database with the given team id
     public void deleteTeam(int getTeamId) throws Exception {
         try {
             this.stm.execute("DELETE FROM team_coureur WHERE team_id = " + getTeamId);
@@ -130,7 +157,9 @@ public class TeamController {
         }
     }
 
-
+    // Get the teams from the database
+    // If the teams are not found, throw an exception
+    // The class team is used to get the values from the database
     public List<Team> getTeams() {
         List<Team> teams = new ArrayList<>();
         try (ResultSet rs = stm.executeQuery("SELECT * FROM teams")) {
@@ -156,6 +185,9 @@ public class TeamController {
         return teams;
     }
 
+    // Update the team with the given values from the textfields and comboboxes
+    // If the team is not found, throw an exception
+    // If the team is found, update the team
     public void updateTeam(int team_id, String teamName, ComboBox<Kleur> teamColor, String teamCountry, DatePicker teamYear, ComboBox<MotorLeverancier> teamMotor, ComboBox<Drivers> teamDriver1, ComboBox<Drivers> teamDriver2, String teamManager) throws Exception {
         try {
             int teamd = team_id;
@@ -171,14 +203,17 @@ public class TeamController {
         }
     }
 
+    // This method is used to get the values from the comboboxes and textfields
     public Drivers getDriver(String teamDriver1) {
         return new Drivers(teamDriver1);
     }
 
+    // This method is used to get the values from the comboboxes and textfields
     public MotorLeverancier getMotor(String teamMotor) {
         return new MotorLeverancier(teamMotor);
     }
 
+    // This method is used to get the values from the comboboxes and textfields
     public Kleur getKleur(String teamColor) {
         return new Kleur(teamColor);
     }

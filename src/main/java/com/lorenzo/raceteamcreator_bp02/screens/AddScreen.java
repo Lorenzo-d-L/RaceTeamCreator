@@ -49,6 +49,7 @@ public class AddScreen {
     private TeamController tc;
 
     public AddScreen(Stage addStage) throws Exception {
+        // Below this, the variables are declared
         root = new Pane();
         grid = new GridPane();
         title = new Label("Add a new team");
@@ -88,11 +89,13 @@ public class AddScreen {
         showAllTeams.setId("showAllTeams");
         icon.setId("icon");
 
+        // Get the data from the database to fill the comboboxes
         cbDriver1.getItems().addAll(tc.getCoureurs());
         cbDriver2.getItems().addAll(tc.getCoureurs());
         cbMotor.getItems().addAll(tc.getMotorLeveranciers());
         cbColor.getItems().addAll(tc.getKleuren());
 
+        // Add the css file and set the scene
         String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/AddScreen.css").toExternalForm();
         Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add(css);
@@ -101,6 +104,7 @@ public class AddScreen {
         tp = new Tooltip("Add a new driver");
         Tooltip.install(btnAddDriver, tp);
 
+        // Set the layout for the grid
         nav.setPrefSize(100, 550);
         nav.setLayoutY(50);
         nav.setAlignment(Pos.CENTER);
@@ -123,6 +127,7 @@ public class AddScreen {
        grid.setLayoutY(75);
        grid.setVgap(5);
 
+       // Add the items to the gridpane
         grid.add(lbName, 0, 0);
         grid.add(txtName, 0, 1);
         grid.add(lbColor, 0, 2);
@@ -142,38 +147,47 @@ public class AddScreen {
         grid.add(btnAddDriver, 2, 14);
         grid.add(btnAdd, 0, 15);
 
+        // Add the logo to the add screen
         Image logo = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/HoofdLogo.png").toExternalForm());
         ImageView imageView = new ImageView(logo);
         imageView.setFitWidth(100);
         imageView.setFitHeight(100);
 
+        // Add the home button in the add screen
         Image homeIcon = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/HomeBut.png").toExternalForm());
         ImageView homeButton = new ImageView(homeIcon);
         homeButton.setFitWidth(50);
         homeButton.setFitHeight(50);
 
+        // Add the showAllTeams button in the add screen
         Image show = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/ShowAll.png").toExternalForm());
         ImageView showAll = new ImageView(show);
         showAll.setFitWidth(50);
         showAll.setFitHeight(50);
 
+        // Add the addTeam button in the add screen
         Image add = new Image(getClass().getResource("/com/lorenzo/raceteamcreator_bp02/icons/Add.png").toExternalForm());
         ImageView addTeam = new ImageView(add);
         addTeam.setFitWidth(50);
         addTeam.setFitHeight(50);
 
+        // If this button is clicked, a new window will open to add a driver
         home.setOnMouseClicked(e -> {
             new HomeScreen(addStage);
         });
 
+        // If this button is clicked, a new window will open to show all teams
         showAllTeams.setOnMouseClicked(e -> {
             new ShowTeamScreen(addStage);
         });
 
+        // If this button is clicked, a new window will open to add a team
+        // This button is not needed, because the user is already on the add screen but it is added for consistency
         btnAddDriver.setOnAction(e -> {
             new AddDriver(new Stage(), cbDriver1, cbDriver2);
         });
 
+        // If this button is clicked, a new team will be added to the database
         btnAdd.setOnAction(e -> {
             if (txtName.getText().isEmpty() || txtCountry.getText().isEmpty() || txtManager.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -184,6 +198,8 @@ public class AddScreen {
                 return;
             }
 
+            // Save the team to the database
+            // If the team is saved, the user will be redirected to the home screen
             try {
                 tc.saveTeam(txtName.getText(),
                             ((Kleur)cbColor.getValue()).getName(),

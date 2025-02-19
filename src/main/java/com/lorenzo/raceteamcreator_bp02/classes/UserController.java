@@ -11,6 +11,7 @@ public class UserController {
     Database db = new Database();
     Statement stm;
 
+    // Constructor for the user controller
     public UserController(Database db) {
         this.db = db;
         try {
@@ -19,6 +20,12 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
+
+    // Register the user
+    // Check if the email and password are not empty
+    // Check if the email contains an @ and a .
+    // Create a new user with the email and password
+    // Insert the email and password into the database
     public void registerUser( String email, String password) {
         if (email.isEmpty() || password.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -46,6 +53,10 @@ public class UserController {
         }
     }
 
+    // Login the user
+    // Check if the email and password are not empty
+    // Check if the email and password are in the database
+    // If all is correct return true and login the user
     public boolean loginUser() {
         user = new User(0, user.getEmail(), user.getPassword());
         try {
@@ -57,6 +68,7 @@ public class UserController {
         }
     }
 
+    // Get the email
     public void setEmail(String email) {
         if (user == null) {
             user = new User(0, email, "");
@@ -65,16 +77,13 @@ public class UserController {
         }
     }
 
+    // Get the password
     public void setPassword(String password) {
         if (user == null) {
             user = new User(0, "", password);
         } else {
             user.setPassword(password);
         }
-    }
-
-    public User getUser() {
-        return user;
     }
 }
 

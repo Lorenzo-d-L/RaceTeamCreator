@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-
 public class AddDriver {
     private GridPane root;
     private Label lbName;
@@ -23,10 +22,12 @@ public class AddDriver {
     private ComboBox<Drivers> cbDriver1;
     private ComboBox<Drivers> cbDriver2;
 
+    // Add a driver to the database
     public AddDriver(Stage AddDriverStage, ComboBox<Drivers> cbDriver1, ComboBox<Drivers> cbDriver2) {
         this.cbDriver1 = cbDriver1;
         this.cbDriver2 = cbDriver2;
 
+        // Create the layout
         root = new GridPane();
         lbName = new Label("Driver Name");
         txtDriver = new TextField();
@@ -37,6 +38,7 @@ public class AddDriver {
         txtDriver.setId("txtDriver");
         btnAdd.setId("btnAdd");
 
+        // Add the css file
         String css = this.getClass().getResource("/com/lorenzo/raceteamcreator_bp02/stylesheet/AddDriver.css").toExternalForm();
         Scene = new Scene(root, 300, 100);
         Scene.getStylesheets().add(css);
@@ -48,9 +50,11 @@ public class AddDriver {
         root.add(txtDriver, 1, 0);
         root.add(btnAdd, 1, 1);
 
+        // This will add the driver to the database and close the window
         btnAdd.setOnAction(e -> {
             db = new Database();
             tc = new TeamController(db);
+            // Save the driver to the database
             try {
                 tc.saveDriver(txtDriver.getText(), cbDriver1);
                 cbDriver1.getItems().clear();
@@ -63,6 +67,7 @@ public class AddDriver {
             }
         });
 
+        // Set the stage
         AddDriverStage.setTitle("Add Driver");
         AddDriverStage.setResizable(false);
         AddDriverStage.setScene(Scene);

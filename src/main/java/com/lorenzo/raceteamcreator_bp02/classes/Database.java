@@ -8,6 +8,7 @@ public class Database {
 
     private Connection conn;
 
+    // Connect to the database
     public Database() {
         try{
             this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/raceteamcreator", "root", "");
@@ -16,13 +17,8 @@ public class Database {
         }
     }
 
+    // Get the connection
     public Connection getConn() {
         return conn;
     }
-
-    public void setConn(Connection conn) {
-        this.conn = conn;
-    }
-
-
 }
