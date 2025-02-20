@@ -135,9 +135,10 @@ public class HomeScreen {
     private void changeTitleColor(Label title) {
         // Create a Timeline with three KeyFrames
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0), e -> title.setTextFill(Color.RED)),
+                new KeyFrame(Duration.seconds(0), e -> title.setTextFill(Color.DARKBLUE)),
                 new KeyFrame(Duration.seconds(1), e -> title.setTextFill(Color.GREEN)),
-                new KeyFrame(Duration.seconds(2), e -> title.setTextFill(Color.BLUE))
+                new KeyFrame(Duration.seconds(2), e -> title.setTextFill(Color.BLUE)),
+                new KeyFrame(Duration.seconds(3), e -> title.setTextFill(Color.BLACK))
         );
         // Set the cycle count to indefinite
         timeline.setCycleCount(Timeline.INDEFINITE);
