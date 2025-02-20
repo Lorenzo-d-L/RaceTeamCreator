@@ -198,6 +198,9 @@ public class TeamController {
             String driver2 = teamDriver2.getValue().getName();
 
             this.stm.executeUpdate("UPDATE teams SET teamnaam = '" + teamName + "', kleur = '" + color + "', team_land = '" + teamCountry + "', team_jaar = '" + year + "', motor_leverancier = '" + motor + "', team_manager = '" + teamManager + "', coureur1 = '" + driver1 + "', coureur2 = '" + driver2 + "' WHERE team_id = " + teamd);
+            this.stm.executeUpdate("DELETE FROM team_coureur WHERE team_id = " + teamd);
+            this.stm.executeUpdate("INSERT INTO team_coureur (team_id, coureur_id) VALUES (" + teamd + ", (SELECT coureur_id FROM coureur WHERE naam = '" + driver1 + "'))");
+            this.stm.executeUpdate("INSERT INTO team_coureur (team_id, coureur_id) VALUES (" + teamd + ", (SELECT coureur_id FROM coureur WHERE naam = '" + driver2 + "'))");
             } catch (Exception e) {
             throw new Exception("Error: " + e.getMessage());
         }
