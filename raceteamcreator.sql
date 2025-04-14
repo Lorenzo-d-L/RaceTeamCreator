@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 20 feb 2025 om 14:29
+-- Gegenereerd op: 20 feb 2025 om 14:46
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -148,7 +148,7 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`team_id`, `teamnaam`, `kleur`, `team_land`, `team_jaar`, `motor_leverancier`, `team_manager`, `coureur1`, `coureur2`) VALUES
-(28, '1', 'dark-Green', 'VOORBEELD', '2025-02-14', 'BMW', 'VOORBEELD', 'Valteri Bottas', 'Nigell Mansel');
+(31, 'VOORBEELD', 'Red', 'VOORBEELD', '2025-02-20', 'Renault', 'VOORBEELD', 'Nigell Mansel', 'Lewis Hamilton');
 
 -- --------------------------------------------------------
 
@@ -166,41 +166,8 @@ CREATE TABLE `team_coureur` (
 --
 
 INSERT INTO `team_coureur` (`team_id`, `coureur_id`) VALUES
-(6, 6),
-(6, 6),
-(7, 6),
-(7, 6),
-(8, 7),
-(8, 7),
-(9, 9),
-(9, 8),
-(10, 6),
-(10, 12),
-(11, 7),
-(11, 9),
-(12, 7),
-(12, 9),
-(13, 7),
-(13, 9),
-(14, 8),
-(14, 8),
-(15, 8),
-(15, 8),
-(16, 8),
-(16, 8),
-(17, 8),
-(17, 8),
-(18, 8),
-(18, 8),
-(19, 8),
-(19, 8),
-(20, 8),
-(20, 8),
-(21, 8),
-(21, 8),
-(22, 6),
-(22, 10),
-(28, 10);
+(31, 16),
+(31, 6);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -268,7 +235,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT voor een tabel `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
