@@ -1,83 +1,135 @@
 # RaceTeamCreator
 
-## Project Overview
+## 🏁 Project Overview
 
-The RaceTeamCreator application helps users create, manage, and organize racing teams efficiently. It provides a user-friendly interface to handle team information, including drivers, cars, and performance statistics. The primary functionality of the application is to add, edit, or delete teams.
+Welcome to RaceTeamCreator. With this application you can add, edit, delete and see the teams you have created. The meaning behind this app is that you can use your mind to build your owen dream team. No pen and papers or excel files. everything will be saved so you dont have to.
 
-## Installation Instructions
+**Why it's valuable:**
+- Simplifies racing team management
+- Helps track and organize key performance metrics
+- Ideal for hobbyists, racing clubs, and event coordinators
 
-Here are the steps to install and run the RaceTeamCreator application on your local machine.
+---
 
-### Prerequisites
+## 💻 Installation Instructions
 
-* Java 11 or higher
+### ✅ Requirements
 
-* XAMPP or MAMP for a local database
+Before you begin, make sure you have the following installed:
 
-### Installation Steps
+- **Java 11** or higher
+- **XAMPP** or **MAMP** (for local MySQL database)
+- **Git** (for cloning the repository)
+- **Maven** (for building the project) – or use the included `mvnw` wrapper
+- **IDE** such as IntelliJ IDEA or Eclipse (optional but recommended)
 
-1. Download or clone the repository:
+### 📦 Steps to Install and Run
 
-    ```bash
-    git clone <repository_url>
-    cd RaceTeamCreator
-    ```
+1. **Clone the Repository**
 
-2. Open the project in your preferred IDE (e.g., IntelliJ IDEA, Eclipse).
+   ```bash
+   git clone <repository_url>
+   cd RaceTeamCreator
+   ```
 
-3. Make sure XAMPP or MAMP is running and MySQL service is enabled.
+2. **Start Your Local MySQL Server**
 
-4. Open the application.properties file and configure the database connection if needed.
+   Open XAMPP or MAMP and ensure the **MySQL** service is running.
 
-5. Build the project using Maven:
-    ```bash
-    ./mvnw clean install
-    ```
+3. **Configure the Database Connection**
 
-6. Run the application:
-    ```bash
-    java -jar target/RaceTeamCreator.jar
-    ```
+   Open the `application.properties` file (usually found in `src/main/resources/`) and update the database credentials if needed:
 
-**If you just want to use it, open the jar file directly by double-clicking it.**
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/race_team_db
+   spring.datasource.username=root
+   spring.datasource.password=your_password
+   ```
 
-## Configuration
+4. **Build the Project**
 
-The application does not require additional configuration for basic usage. However, to customize team properties, modify the application.properties file.
+   If you have Maven installed:
 
-## Usage Guide
+   ```bash
+   ./mvnw clean install
+   ```
 
-1. Launch the application.
+5. **Run the Application**
 
-2. Add a new team by providing a team name and relevant details.
+   ```bash
+   java -jar target/RaceTeamCreator.jar
+   ```
 
-3. View the list of all existing teams.
+   Or, simply **double-click the JAR file** to launch the application (GUI-based).
 
-4. Edit team information, such as team name or team members.
+---
 
-5. Delete teams that are no longer needed.
+## ⚙️ Configuration
 
-6. View detailed information about each team.
+For basic usage, no extra configuration is needed.
 
-## Features
+However, if you'd like to customize the application, you can do so by editing the `application.properties` file. Common configurable options include:
 
-* Add
+- Database URL, username, and password
+- Server port (if applicable)
+- File paths for exported data (future feature)
 
-* Edit
+---
 
-* Delete
+## 🚀 Usage Guide
 
-* See
+1. **Launch the Application**
 
-## Roadmap / Timeline
+   After running the JAR file, the RaceTeamCreator GUI will open.
 
-* **Q1 2025: Enhance user interface with more customization options.**
+2. **Add a Team**
 
-* **Q2 2025: Implement data export features.**
+   - Click "Add Team"
+   - Enter team name, driver names, and car details
+   - Save the team
 
-* **Q3 2025: Add performance analytics and reporting.**
+3. **Edit a Team**
 
-* **Q4 2025: Introduce user accounts and admin accounts for better access control.**
+   - Select a team from the list
+   - Click "Edit"
+   - Update the information and save
 
-We welcome contributions! Please submit a pull request or open an issue if you have any ideas or encounter any problems.
+4. **Delete a Team**
 
+   - Select the team to delete
+   - Click "Delete" and confirm
+
+5. **View Team Info**
+
+   - Click on any team to view detailed information, including performance statistics (if available)
+
+---
+
+## 🛠 Features
+
+- ✅ Add racing teams with drivers and cars
+- ✅ Edit team details
+- ✅ Delete existing teams
+- ✅ View team information
+- ⚠️ More advanced features coming soon!
+
+---
+
+## 📅 Roadmap / Timeline
+
+| Quarter | Features Planned |
+|--------|------------------|
+| **Q1 2025** | Enhance UI with customization options |
+| **Q2 2025** | Implement data export (CSV, PDF) |
+| **Q3 2025** | Add performance analytics and reporting |
+| **Q4 2025** | Introduce user accounts & admin roles |
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions!
+
+- Found a bug? [Open an issue](#)
+- Have a new feature idea? Submit a pull request!
+- Want to help with documentation or testing? Reach out!
